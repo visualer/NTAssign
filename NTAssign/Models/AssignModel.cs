@@ -52,8 +52,8 @@ namespace NTAssign.Models
             {
                 if (p1 % 4 - 3 != (cos[0] == -1 ? 0 : -1))
                 {
-                    resultString += @"Invalid input: out of range. You may have mistakenly put " +
-                         p1Arr[p1 + 5 - (p1 % 4) * 2] + " as " + p1Arr[p1] + ".";
+                    resultString += @"Invalid input: out of range. You may have mistakenly put " + p1Arr[p1] + " instead of " +
+                         p1Arr[p1 + 5 - (p1 % 4) * 2] + ".";
                     return new PlotModel() { ar = AssignResult.error, resultString = resultString };
                 }
                 p2 = p;
@@ -254,7 +254,7 @@ namespace NTAssign.Models
                     pm.resultString += "The assignment result is:<br /><font style=\"font-size: 28px;\">";
                     pm.result = pm.result.OrderBy(e => Dist(e[2], e[3], pm.point[0], pm.point[1])).ToList();
                     for (int i = 0; i < pm.result.Count; i++)
-                        pm.resultString += "<b>(" + (int)pm.result[i][0] + ", " + (int)pm.result[i][1] + ")</b>" + 
+                        pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" + 
                             (i == pm.result.Count ? ", " : "");
                     pm.resultString += "</font>";
                     return pm;
@@ -277,10 +277,10 @@ namespace NTAssign.Models
             if (pm.result.Count > 0)
             {
                 pm.ar = AssignResult.possible;
-                pm.resultString += "The likely assignment is:<br/><font style=\"font-size: 28px;\">";
+                pm.resultString += "The likely assignments include:<br/><font style=\"font-size: 28px;\">";
                 pm.result = pm.result.OrderBy(e => Dist(e[2], e[3], pm.point[0], pm.point[1])).ToList();
                 for (int i = 0; i < pm.result.Count; i++)
-                    pm.resultString += "<b>(" + (int)pm.result[i][0] + ", " + (int)pm.result[i][1] + ")</b>" +
+                    pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" +
                         (i != pm.result.Count - 1 ? ", " : "");
                 pm.resultString += "</font>";
                 return pm;
@@ -306,7 +306,7 @@ namespace NTAssign.Models
             pm.resultString += "No match. The possible results include:<br /><font style=\"font-size: 28px;\">";
             pm.result = pm.result.OrderBy(e => Dist(e[2], e[3], pm.point[0], pm.point[1])).ToList();
             for (int i = 0; i < pm.result.Count; i++)
-                pm.resultString += "<b>(" + (int)pm.result[i][0] + ", " + (int)pm.result[i][1] + ")</b>" +
+                pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" +
                     (i != pm.result.Count - 1 ? ", " : "");
             pm.resultString += "</font>";
             pm.ar = AssignResult.impossible;

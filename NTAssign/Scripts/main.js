@@ -19,7 +19,7 @@
         }
         if ($("#slP1").selectpicker("val") === "") {
             $("#hint").addClass("alert-danger");
-            $("#hint").html("<span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> Please select the transition type.");
+            $("#hint").html("<span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span> Please select the type of transition energy.");
             return false;
         }
         $(".selectpicker").removeAttr("disabled");

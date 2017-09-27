@@ -112,8 +112,8 @@ WriteLiteral(" id=\"hint\"");
 
 WriteLiteral(" style=\"font-size: 16px; padding: 8px; border-radius: 4px;\"");
 
-WriteLiteral(" class=\"col-lg-7 col-md-8 col-sm-6 col-xs-8 col-lg-offset-2_5 col-md-offset-2 col" +
-"-sm-offset-3 col-xs-offset-1\"");
+WriteLiteral(" class=\"col-lg-9 col-md-11 col-sm-8 col-xs-9 col-lg-offset-1 col-md-offset-0_5 co" +
+"l-sm-offset-1 col-xs-offset-1\"");
 
 WriteLiteral(">\r\n                At least 2 values are required.<br />\r\n                Only pa" +
 "ired transition energies are available in this version.\r\n            </p>\r\n     " +
@@ -374,14 +374,14 @@ WriteLiteral("                <tr>\r\n");
             #line hidden
 WriteLiteral("                    <td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 4519), Tuple.Create("", 4538)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 4520), Tuple.Create("", 4539)
             
             #line 87 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 4528), Tuple.Create<System.Object, System.Int32>(li2[i][j]
+, Tuple.Create(Tuple.Create("", 4529), Tuple.Create<System.Object, System.Int32>(li2[i][j]
             
             #line default
             #line hidden
-, 4528), false)
+, 4529), false)
 );
 
 WriteLiteral(">");
@@ -417,14 +417,14 @@ WriteLiteral(" style=\"text-align: left;\"");
 
 WriteLiteral("><td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 4668), Tuple.Create("", 4690)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 4669), Tuple.Create("", 4691)
             
             #line 91 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 4677), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
+, Tuple.Create(Tuple.Create("", 4678), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
             
             #line default
             #line hidden
-, 4677), false)
+, 4678), false)
 );
 
 WriteLiteral(">");
