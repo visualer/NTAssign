@@ -77,7 +77,10 @@
     <div class="col-md-6 col-xs-12 col-sm-12">
         <table class="table table-striped math">
             @{ 
-                var (li1, li2, li3) = Model.GetParams();
+                var li = Model.GetParams();
+                var li1 = li.Item1;
+                var li2 = li.Item2;
+                var li3 = li.Item3;
             }
             @for (int i = 0; i < li1.Count; i++)
             {

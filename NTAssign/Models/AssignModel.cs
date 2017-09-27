@@ -314,7 +314,7 @@ namespace NTAssign.Models
         }
 
 
-        public (List<string[]>, List<int[]>, string) GetParams()
+        public Tuple<List<string[]>, List<int[]>, string> GetParams()
         {
             string ToMath(string s) => @"\(" + s + @"\)";
             var arr = new List<string[]>();
@@ -470,7 +470,7 @@ namespace NTAssign.Models
             string refstr = "";
             for (int i = 0; i < reflist.Count; i++)
                 refstr += "<a target='_blank' href='http://doi.org/" + doi[reflist[i]] + "'>[" + (i + 1) + "] " + references[reflist[i]] + (i != reflist.Count - 1 ? "<br /><a/>" : "");
-            return (arr, colspan, refstr);
+            return new Tuple<List<string[]>, List<int[]>, string>(arr, colspan, refstr);
         }
 
     }

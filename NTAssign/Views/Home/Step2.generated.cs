@@ -335,7 +335,10 @@ WriteLiteral(">\r\n");
             
             #line 79 "..\..\Views\Home\Step2.cshtml"
                
-                var (li1, li2, li3) = Model.GetParams();
+                var li = Model.GetParams();
+                var li1 = li.Item1;
+                var li2 = li.Item2;
+                var li3 = li.Item3;
             
             
             #line default
@@ -343,13 +346,13 @@ WriteLiteral(">\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 82 "..\..\Views\Home\Step2.cshtml"
+            #line 85 "..\..\Views\Home\Step2.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 82 "..\..\Views\Home\Step2.cshtml"
+            #line 85 "..\..\Views\Home\Step2.cshtml"
              for (int i = 0; i < li1.Count; i++)
             {
 
@@ -359,13 +362,13 @@ WriteLiteral("\r\n");
 WriteLiteral("                <tr>\r\n");
 
             
-            #line 85 "..\..\Views\Home\Step2.cshtml"
+            #line 88 "..\..\Views\Home\Step2.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 85 "..\..\Views\Home\Step2.cshtml"
+            #line 88 "..\..\Views\Home\Step2.cshtml"
                  for (int j = 0; j < li1[i].Length; j++)
                 {
 
@@ -374,20 +377,20 @@ WriteLiteral("                <tr>\r\n");
             #line hidden
 WriteLiteral("                    <td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 4520), Tuple.Create("", 4539)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 4618), Tuple.Create("", 4637)
             
-            #line 87 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 4529), Tuple.Create<System.Object, System.Int32>(li2[i][j]
+            #line 90 "..\..\Views\Home\Step2.cshtml"
+, Tuple.Create(Tuple.Create("", 4627), Tuple.Create<System.Object, System.Int32>(li2[i][j]
             
             #line default
             #line hidden
-, 4529), false)
+, 4627), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 87 "..\..\Views\Home\Step2.cshtml"
+            #line 90 "..\..\Views\Home\Step2.cshtml"
                                       Write(Html.Raw(li1[i][j]));
 
             
@@ -396,7 +399,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n");
 
             
-            #line 88 "..\..\Views\Home\Step2.cshtml"
+            #line 91 "..\..\Views\Home\Step2.cshtml"
                 }
 
             
@@ -405,7 +408,7 @@ WriteLiteral("</td>\r\n");
 WriteLiteral("                </tr>\r\n");
 
             
-            #line 90 "..\..\Views\Home\Step2.cshtml"
+            #line 93 "..\..\Views\Home\Step2.cshtml"
             }
 
             
@@ -417,20 +420,20 @@ WriteLiteral(" style=\"text-align: left;\"");
 
 WriteLiteral("><td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 4669), Tuple.Create("", 4691)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 4767), Tuple.Create("", 4789)
             
-            #line 91 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 4678), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
+            #line 94 "..\..\Views\Home\Step2.cshtml"
+, Tuple.Create(Tuple.Create("", 4776), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
             
             #line default
             #line hidden
-, 4678), false)
+, 4776), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 91 "..\..\Views\Home\Step2.cshtml"
+            #line 94 "..\..\Views\Home\Step2.cshtml"
                                                                Write(Html.Raw(li3));
 
             
@@ -443,7 +446,7 @@ DefineSection("scripts", () => {
 WriteLiteral("\r\n<script>\r\n    $(page2Load(");
 
             
-            #line 98 "..\..\Views\Home\Step2.cshtml"
+            #line 101 "..\..\Views\Home\Step2.cshtml"
             Write(Html.Raw(Model.Env));
 
             

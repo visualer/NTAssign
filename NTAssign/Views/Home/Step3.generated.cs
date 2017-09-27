@@ -290,18 +290,18 @@ WriteLiteral("\r\n");
 
             
             #line 90 "..\..\Views\Home\Step3.cshtml"
-    
+        
             
             #line default
             #line hidden
             
             #line 90 "..\..\Views\Home\Step3.cshtml"
-      
+          
         if (Model.ar != AssignResult.error)
         {
-            var (all, all_label) = Model.All();
-            var (result, result_label) = Model.Result();
-            var (rbm, rbm_label, rbm_pos) = Model.RBM();
+            var all = Model.All();
+            var result = Model.Result();
+            var rbm = Model.RBM();
 
             
             #line default
@@ -347,7 +347,7 @@ WriteLiteral(",\r\n                    all: ");
 
             
             #line 102 "..\..\Views\Home\Step3.cshtml"
-                    Write(Html.Raw(all));
+                    Write(Html.Raw(all.Item1));
 
             
             #line default
@@ -356,7 +356,7 @@ WriteLiteral(",\r\n                    all_label: ");
 
             
             #line 103 "..\..\Views\Home\Step3.cshtml"
-                          Write(Html.Raw(all_label));
+                          Write(Html.Raw(all.Item2));
 
             
             #line default
@@ -365,7 +365,7 @@ WriteLiteral(", //allLabel is rather ugly\r\n                    result: ");
 
             
             #line 104 "..\..\Views\Home\Step3.cshtml"
-                       Write(Html.Raw(result));
+                       Write(Html.Raw(result.Item1));
 
             
             #line default
@@ -374,7 +374,7 @@ WriteLiteral(",\r\n                    result_label: ");
 
             
             #line 105 "..\..\Views\Home\Step3.cshtml"
-                             Write(Html.Raw(result_label));
+                             Write(Html.Raw(result.Item2));
 
             
             #line default
@@ -383,7 +383,7 @@ WriteLiteral(",\r\n                    rbm: ");
 
             
             #line 106 "..\..\Views\Home\Step3.cshtml"
-                    Write(Html.Raw(rbm));
+                    Write(Html.Raw(rbm.Item1));
 
             
             #line default
@@ -392,7 +392,7 @@ WriteLiteral(",\r\n                    rbm_label: ");
 
             
             #line 107 "..\..\Views\Home\Step3.cshtml"
-                          Write(Html.Raw(rbm_label));
+                          Write(Html.Raw(rbm.Item2));
 
             
             #line default
@@ -401,7 +401,7 @@ WriteLiteral(",\r\n                    rbm_pos: ");
 
             
             #line 108 "..\..\Views\Home\Step3.cshtml"
-                        Write(Html.Raw(rbm_pos));
+                        Write(Html.Raw(rbm.Item3));
 
             
             #line default
