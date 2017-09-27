@@ -1,0 +1,21 @@
+﻿# humanstxt.org/
+# The humans responsible & technology colophon
+
+# DEVELOPER TEAM
+
+    Sida Sun -- Full-stack developer -- Accel@pku.edu.cn
+        College of Chemistry and Molecular Engineering,
+        Peking University,
+        Beijing, 100871 China
+
+# THANKS
+
+    Prof. Juan Yang, Daqi Zhang, Yuecong Hu, Chenmaya Xia
+
+# TECHNOLOGY COLOPHON
+
+    ASP.NET MVC 4, C# 7 (.NET 4.7)
+    CSS3, HTML5
+    jQuery, Modernizr, Normalize.css, Bootstrap, Bootstrap-select, Respond.js, Glyphicons
+    Flot.js, MathJax
+    waifu2x for upscaling and reducing noise

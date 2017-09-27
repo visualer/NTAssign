@@ -1,0 +1,100 @@
+﻿@* ClassSuffix: _ *@
+@model NTAssign.Models.AssignModel
+@{
+    ViewBag.Title = "Step2";
+}
+@section styles
+{
+    <style>
+        #chart {
+            width: 400px;
+            height: 400px;
+        }
+        
+    </style>
+}
+
+<h1 class="math">Step 2 <small>@Energy.envArr[Model.Env]</small></h1>
+<hr />
+<div class="row">
+@using (Html.BeginForm("Step3", "Home", FormMethod.Post, new { name = "formInput", onsubmit = "return validate(this)" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal math col-md-6">
+        <div class="row">
+            <p id="hint" style="font-size: 16px; padding: 8px; border-radius: 4px;" class="col-lg-7 col-md-8 col-sm-6 col-xs-8 col-lg-offset-2_5 col-md-offset-2 col-sm-offset-3 col-xs-offset-1">
+                At least 2 values are required.<br />
+                Only paired transition energies are available in this version.
+            </p>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="slEnv" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">SWNT Type</label>
+            <div class="col-md-6 col-sm-4 col-xs-8 col-xs-offset-0_5">
+                @Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "slEnv", @class = "form-control selectpicker", disabled = "disabled" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="slP1" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">Transition Energy 1</label>
+            <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
+                @Html.DropDownListFor(model => model.P1, ViewBag.slType as List<SelectListItem>, new { id = "slP1", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)"})
+            </div>
+            <label for="slP1" class="control-label col-auto">=</label>
+            <div class="col-md-4 col-sm-4 col-xs-5">
+                @Html.EditorFor(model => model.Val1, new { htmlAttributes = new { id = "edVal1", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
+            </div>
+            <label class="control-label col-auto">\(\mathrm{eV}\)</label>
+        </div>
+        <div class="form-group">
+            <label for="slP2" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">Transition Energy 2</label>
+            <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
+                @Html.DropDownListFor(model => model.P2, ViewBag.slType as List<SelectListItem>, new { id = "slP2", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)", disabled = "disabled" })
+            </div>
+            <label for="slP1" class="control-label col-auto">=</label>
+            <div class="col-md-4 col-sm-4 col-xs-5">
+                @Html.EditorFor(model => model.Val2, new { htmlAttributes = new { id = "edVal2", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
+            </div>
+            <label class="control-label col-auto">\(\mathrm{eV}\)</label>
+        </div>
+        <div class="form-group">
+            <label for="slRBM" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">RBM</label>
+            <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
+                <button type="button" class="btn btn-default btn-block" style="text-align: left" disabled="disabled">\(\omega_{\mathrm{RBM}}\)</button>
+            </div>
+            <label for="slP1" class="control-label col-auto">=</label>
+            <div class="col-md-4 col-sm-4 col-xs-5">
+                @Html.EditorFor(model => model.RBM, new { htmlAttributes = new { id = "edRBM", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
+            </div>
+            <label class="control-label col-auto">\(\mathrm{cm}^{-1}\)</label>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-sm-offset-3 col-md-10 col-xs-offset-0_5">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+    <div class="col-md-6 col-xs-12 col-sm-12">
+        <table class="table table-striped math">
+            @{ 
+                var (li1, li2, li3) = Model.GetParams();
+            }
+            @for (int i = 0; i < li1.Count; i++)
+            {
+                <tr>
+                @for (int j = 0; j < li1[i].Length; j++)
+                {
+                    <td colspan=@li2[i][j]>@Html.Raw(li1[i][j])</td>
+                }
+                </tr>
+            }
+            <tr style="text-align: left;"><td colspan=@li2[0].Sum()>@Html.Raw(li3)</td></tr>
+        </table>
+    </div>
+</div>
+@section scripts
+{
+<script>
+    $(page2Load(@(Html.Raw(Model.Env))));
+</script>
+}

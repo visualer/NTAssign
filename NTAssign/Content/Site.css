@@ -1,0 +1,115 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.math {
+    visibility: hidden;
+}
+
+table {
+    align-content: center !important;
+    text-align: center !important;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+.col-auto {
+    float: left;
+    position: relative;
+    padding-top: 7px;
+}
+
+@media (min-width: 1200px) {
+    .col-lg-offset-2_5 {
+        margin-left: 20.83333333%;
+    }
+    .col-lg-2_5 {
+        width: 20.83333333%;
+    }
+    .col-lg-offset-0_5 {
+        margin-left: 4.16666667%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .col-md-offset-0_5 {
+        margin-left: 4.16666667%;
+    }
+    .col-md-1_5 {
+        width: 12.5%;
+    }
+    .col-md-offset-1_5 {
+        margin-left: 16.66666667%;
+    }
+
+    .col-md-2_5 {
+        width: 20.83333333%;
+    }
+    .col-md-3_5 {
+        width: 29.16666667%;
+    }
+
+    .col-md-offset-7_5 {
+        margin-left: 62.5%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .col-sm-offset-0_5 {
+        margin-left: 4.16666667%;
+    }
+}
+
+@media (max-width: 992px) {
+    .margin-xs-top {
+        margin-top: 25px;
+    }
+    .changing_height > .bottom-div {
+        position: relative;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .col-xs-offset-0_5 {
+        margin-left: 4.16666667%;
+    }
+}
+
+@media (min-width: 992px) {
+    .changing_height {
+        height: 460px;
+    }
+        .changing_height > .bottom-div {
+            bottom: 0;
+            width: 95%;
+            position: absolute;
+        }
+}
+.bottom-div {
+    padding: 10px;
+    padding-bottom: 5px;
+}

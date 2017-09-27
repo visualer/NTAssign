@@ -1,0 +1,38 @@
+﻿@* ClassSuffix: _ *@
+@model NTAssign.Models.AssignModel
+@{
+    ViewBag.Title = "Step1";
+}
+@section styles
+{
+    <style>
+    </style>
+}
+<h3 class="text-center">
+    (n,m) Assignment Program for SWNTs under Complex Environment
+</h3>
+<h1>Step 1</h1>
+
+<hr />
+@using (Html.BeginForm("Step2", "Home"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal math">
+        <div class="form-group">
+            <label for="selectEnv" class="control-label col-lg-3 col-md-4 col-sm-5 col-xs-12 col-xs-offset-0_5">Please select the SWNT sample type:</label>
+            <div class="col-lg-3 col-md-3_5 col-sm-4 col-xs-6 col-xs-offset-0_5">
+                @Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "selectEnv", @class = "form-control selectpicker" })
+            </div>
+            <div class="col-lg-1 col-md-1_5 col-sm-2 col-xs-2 col-xs-offset-0_5">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+            <div class="col-lg-offset-0_5 col-lg-4 col-md-offset-0 col-md-3 col-sm-offset-0_5 margin-xs-top col-xs-12 col-xs-offset-0_5">
+                <h4>Update Log</h4>
+                <p>
+                    <b>1.0.0_beta &mdash; 2017/9/25</b><br />
+                    - First release.
+                </p>
+            </div>
+        </div>
+    </div>
+}

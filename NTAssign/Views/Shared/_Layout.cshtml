@@ -1,0 +1,53 @@
+﻿@* ClassSuffix: _ *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-compatible" content="IE=edge, chrome=1">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="container body-content">
+        <a href="http://www.chem.pku.edu.cn/liy/labhomepage" target="_blank"><img src="~/Content/banner_waifu2x.png" style="width: 75%;" class="center-block" /></a>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2009&ndash;@DateTime.Now.Year Nanomaterials & Nanostructures Group, Peking University. All rights reserved.</p>
+            <p>
+                For scientific issues, contact <b>Prof. Juan Yang, yang_juan(at)pku.edu.cn</b>.<br />
+                For technical assistance, contact <b>Sida Sun, accel(at)pku.edu.cn</b> <a href="~/humans.txt">(site developer)</a>
+            </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG-full,Safe&locale=en"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        showProcessingMessages: false,
+        showMathMenu: false,
+        messageStyle: "none",
+        tex2jax: {
+        processEscapes: true,
+        preview: "none"
+        }
+        });
+        MathJax.Hub.Register.StartupHook("End", function () {
+        $(".math").removeClass("math");
+        });
+        MathJax.Hub.Register.MessageHook("New Math", function () {
+        $(".math").removeClass("math");
+        });
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/flot")
+    <script src="~/Scripts/main.js"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
