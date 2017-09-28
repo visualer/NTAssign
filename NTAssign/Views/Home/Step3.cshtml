@@ -39,12 +39,14 @@
             <br />
             <br />
             <p id="resultDiv" class="@( 
-                Model.ar != AssignResult.error ? "alert-success" : "alert-error"
+                Model.ar != AssignResult.error ? "alert-success" : "alert-danger"
                 ) text-center" style="padding: 12px; border-radius: 4px; font-size: 24px;">
                 @Html.Raw(Model.resultString)
             </p>
+           @if (Model.ar != AssignResult.error)
+            {
             <div style="font-size: 18px; border-radius: 4px; border: 2px solid #808080;" class="bottom-div clearfix">
-                @if (Model.pointType == "green")
+               @if (Model.pointType == "green")
                 {
                     <p><font style="color: rgb(12, 180, 15);">&#11046;</font> \(E_{ii}\) vs. \(\omega_\mathrm{RBM}\)</p>
                 }
@@ -72,6 +74,7 @@
                     Laser resonance window: \(\pm100\ \mathrm{meV}\)
                 </p>
             </div>
+            }
         </div>
     </div>
 </div>
