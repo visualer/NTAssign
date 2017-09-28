@@ -60,8 +60,8 @@ WriteLiteral("<h3");
 
 WriteLiteral(" class=\"text-center\"");
 
-WriteLiteral(">\r\n    (n,m) Assignment Program for SWNTs under Complex Environment\r\n</h3>\r\n<h1>S" +
-"tep 1</h1>\r\n\r\n<hr />\r\n");
+WriteLiteral(">\r\n    (n,m) Assignment Program for SWNTs Under Complex Environments\r\n</h3>\r\n<h1>" +
+"Step 1</h1>\r\n\r\n<hr />\r\n");
 
             
             #line 17 "..\..\Views\Home\Step1.cshtml"
