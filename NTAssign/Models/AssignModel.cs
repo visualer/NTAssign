@@ -270,7 +270,7 @@ namespace NTAssign.Models
             pm.result = pm.all
                 .Where(e => (
                 (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) && 
-                pm.point[0] - e[2] >= (dxmin_p ?? -0.040) && pm.point[0] - e[2] <= (dxmax_p ?? 0.010) && 
+                pm.point[0] - e[2] >= (dxmin_p ?? -0.040) && pm.point[0] - e[2] <= (dxmax_p ?? 0.0126) && 
                 pm.point[1] - e[3] <= (dymax_p ?? 0.030) && pm.point[1] - e[3] >= (dymin_p ?? -0.030)
                 ))
                 .ToList();

@@ -48,25 +48,14 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
-
-DefineSection("styles", () => {
-
-WriteLiteral("\r\n    <style>\r\n        ");
-
-WriteLiteral("@media (max-width: 768px) {\r\n            html, body {\r\n                min-width:" +
-" 768px;\r\n            }\r\n        }\r\n    </style>\r\n");
-
-});
-
-WriteLiteral("<h1");
+WriteLiteral("\r\n\r\n<h1");
 
 WriteLiteral(" class=\"math\"");
 
 WriteLiteral(">\r\n    Step 3 <small>");
 
             
-            #line 17 "..\..\Views\Home\Step3.cshtml"
+            #line 8 "..\..\Views\Home\Step3.cshtml"
              Write(Energy.envArr[Model.type]);
 
             
@@ -121,7 +110,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 34 "..\..\Views\Home\Step3.cshtml"
+            #line 25 "..\..\Views\Home\Step3.cshtml"
                    Write(Html.Raw(Model.YAxisLabel()));
 
             
@@ -150,7 +139,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 41 "..\..\Views\Home\Step3.cshtml"
+            #line 32 "..\..\Views\Home\Step3.cshtml"
                Write(Html.Raw(Model.XAxisLabel()));
 
             
@@ -166,17 +155,17 @@ WriteLiteral(">\r\n            <br />\r\n            <br />\r\n            <p");
 
 WriteLiteral(" id=\"resultDiv\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1877), Tuple.Create("\"", 2001)
+WriteAttribute("class", Tuple.Create(" class=\"", 1704), Tuple.Create("\"", 1828)
             
-            #line 50 "..\..\Views\Home\Step3.cshtml"
-, Tuple.Create(Tuple.Create("", 1885), Tuple.Create<System.Object, System.Int32>( 
+            #line 41 "..\..\Views\Home\Step3.cshtml"
+, Tuple.Create(Tuple.Create("", 1712), Tuple.Create<System.Object, System.Int32>( 
                 Model.ar != AssignResult.error ? "alert-success" : "alert-error"
                 
             
             #line default
             #line hidden
-, 1885), false)
-, Tuple.Create(Tuple.Create(" ", 1989), Tuple.Create("text-center", 1990), true)
+, 1712), false)
+, Tuple.Create(Tuple.Create(" ", 1816), Tuple.Create("text-center", 1817), true)
 );
 
 WriteLiteral(" style=\"padding: 12px; border-radius: 4px; font-size: 24px;\"");
@@ -186,7 +175,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 53 "..\..\Views\Home\Step3.cshtml"
+            #line 44 "..\..\Views\Home\Step3.cshtml"
            Write(Html.Raw(Model.resultString));
 
             
@@ -201,13 +190,13 @@ WriteLiteral(" class=\"bottom-div clearfix\"");
 WriteLiteral(">\r\n");
 
             
-            #line 56 "..\..\Views\Home\Step3.cshtml"
+            #line 47 "..\..\Views\Home\Step3.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Home\Step3.cshtml"
+            #line 47 "..\..\Views\Home\Step3.cshtml"
                  if (Model.pointType == "green")
                 {
 
@@ -221,7 +210,7 @@ WriteLiteral(" style=\"color: rgb(12, 180, 15);\"");
 WriteLiteral(">&#11046;</font> \\(E_{ii}\\) vs. \\(\\omega_\\mathrm{RBM}\\)</p>\r\n");
 
             
-            #line 59 "..\..\Views\Home\Step3.cshtml"
+            #line 50 "..\..\Views\Home\Step3.cshtml"
                 }
                 else
                 {
@@ -236,7 +225,7 @@ WriteLiteral(" style=\"color: rgb(255, 0, 0); font-weight: 900;\"");
 WriteLiteral(">&#9632;</font> &nbsp;\\(E_{ii}\\) difference vs. \\(E_{ii}\\) average</p>\r\n");
 
             
-            #line 63 "..\..\Views\Home\Step3.cshtml"
+            #line 54 "..\..\Views\Home\Step3.cshtml"
                     if (Model.BluePoint() != null)
                     {
 
@@ -250,7 +239,7 @@ WriteLiteral(" style=\"color: rgb(0, 0, 255); font-weight: 900;\"");
 WriteLiteral(">&#11046;</font> \\(E_{ii}\\) difference vs. \\(\\omega_\\mathrm{RBM}\\)</p>\r\n");
 
             
-            #line 66 "..\..\Views\Home\Step3.cshtml"
+            #line 57 "..\..\Views\Home\Step3.cshtml"
                     }
                 }
 
@@ -289,13 +278,13 @@ DefineSection("scripts", () => {
 WriteLiteral("\r\n");
 
             
-            #line 90 "..\..\Views\Home\Step3.cshtml"
+            #line 81 "..\..\Views\Home\Step3.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 90 "..\..\Views\Home\Step3.cshtml"
+            #line 81 "..\..\Views\Home\Step3.cshtml"
           
         if (Model.ar != AssignResult.error)
         {
@@ -310,7 +299,7 @@ WriteLiteral("            <script>\r\n                var params = {\r\n        
 "");
 
             
-            #line 98 "..\..\Views\Home\Step3.cshtml"
+            #line 89 "..\..\Views\Home\Step3.cshtml"
                       Write(Html.Raw(Model.Point()));
 
             
@@ -319,7 +308,7 @@ WriteLiteral("            <script>\r\n                var params = {\r\n        
 WriteLiteral(",\r\n                    pointType: \"");
 
             
-            #line 99 "..\..\Views\Home\Step3.cshtml"
+            #line 90 "..\..\Views\Home\Step3.cshtml"
                            Write(Model.pointType);
 
             
@@ -328,7 +317,7 @@ WriteLiteral(",\r\n                    pointType: \"");
 WriteLiteral("\",\r\n                    bluePoint: ");
 
             
-            #line 100 "..\..\Views\Home\Step3.cshtml"
+            #line 91 "..\..\Views\Home\Step3.cshtml"
                            Write(Model.BluePoint() ?? "null");
 
             
@@ -337,7 +326,7 @@ WriteLiteral("\",\r\n                    bluePoint: ");
 WriteLiteral(",\r\n                    isMetal: ");
 
             
-            #line 101 "..\..\Views\Home\Step3.cshtml"
+            #line 92 "..\..\Views\Home\Step3.cshtml"
                         Write(Html.Raw(Model.IsMetal()));
 
             
@@ -346,7 +335,7 @@ WriteLiteral(",\r\n                    isMetal: ");
 WriteLiteral(",\r\n                    all: ");
 
             
-            #line 102 "..\..\Views\Home\Step3.cshtml"
+            #line 93 "..\..\Views\Home\Step3.cshtml"
                     Write(Html.Raw(all.Item1));
 
             
@@ -355,7 +344,7 @@ WriteLiteral(",\r\n                    all: ");
 WriteLiteral(",\r\n                    all_label: ");
 
             
-            #line 103 "..\..\Views\Home\Step3.cshtml"
+            #line 94 "..\..\Views\Home\Step3.cshtml"
                           Write(Html.Raw(all.Item2));
 
             
@@ -364,7 +353,7 @@ WriteLiteral(",\r\n                    all_label: ");
 WriteLiteral(", //allLabel is rather ugly\r\n                    result: ");
 
             
-            #line 104 "..\..\Views\Home\Step3.cshtml"
+            #line 95 "..\..\Views\Home\Step3.cshtml"
                        Write(Html.Raw(result.Item1));
 
             
@@ -373,7 +362,7 @@ WriteLiteral(", //allLabel is rather ugly\r\n                    result: ");
 WriteLiteral(",\r\n                    result_label: ");
 
             
-            #line 105 "..\..\Views\Home\Step3.cshtml"
+            #line 96 "..\..\Views\Home\Step3.cshtml"
                              Write(Html.Raw(result.Item2));
 
             
@@ -382,7 +371,7 @@ WriteLiteral(",\r\n                    result_label: ");
 WriteLiteral(",\r\n                    rbm: ");
 
             
-            #line 106 "..\..\Views\Home\Step3.cshtml"
+            #line 97 "..\..\Views\Home\Step3.cshtml"
                     Write(Html.Raw(rbm.Item1));
 
             
@@ -391,7 +380,7 @@ WriteLiteral(",\r\n                    rbm: ");
 WriteLiteral(",\r\n                    rbm_label: ");
 
             
-            #line 107 "..\..\Views\Home\Step3.cshtml"
+            #line 98 "..\..\Views\Home\Step3.cshtml"
                           Write(Html.Raw(rbm.Item2));
 
             
@@ -400,7 +389,7 @@ WriteLiteral(",\r\n                    rbm_label: ");
 WriteLiteral(",\r\n                    rbm_pos: ");
 
             
-            #line 108 "..\..\Views\Home\Step3.cshtml"
+            #line 99 "..\..\Views\Home\Step3.cshtml"
                         Write(Html.Raw(rbm.Item3));
 
             
@@ -411,7 +400,7 @@ WriteLiteral(",\r\n                    JSLint: \"f**k JSLint for \'expression ex
 "(drawPlot(\"plot-placeholder\", params));\r\n            </script>\r\n");
 
             
-            #line 113 "..\..\Views\Home\Step3.cshtml"
+            #line 104 "..\..\Views\Home\Step3.cshtml"
         }
         else
         {
@@ -435,7 +424,7 @@ WriteLiteral(@"            <script>
 ");
 
             
-            #line 129 "..\..\Views\Home\Step3.cshtml"
+            #line 120 "..\..\Views\Home\Step3.cshtml"
         }
     
             

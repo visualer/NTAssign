@@ -113,3 +113,9 @@ td {
     padding: 10px;
     padding-bottom: 5px;
 }
+
+@media (max-width: 768px) {
+    html, body {
+        min-width: 450px;
+    }
+}
