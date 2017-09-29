@@ -160,15 +160,16 @@ WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; 20
             #line hidden
 WriteLiteral(@" Nanomaterials & Nanostructures Group, Peking University. All rights reserved.</p>
             <p>
-                For scientific issues, please contact <b>Prof. Juan Yang, yang_juan(at)pku.edu.cn</b>.<br />
-                For technical assistance, please contact <b>Sida Sun, accel(at)pku.edu.cn</b> <a");
+                Please contact <b>Prof. Juan Yang, yang_juan(at)pku.edu.cn</b> for any scientific issues.<br />
+                Please contact <b>Sida Sun, accel(at)pku.edu.cn</b> <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1193), Tuple.Create("\"", 1212)
-, Tuple.Create(Tuple.Create("", 1200), Tuple.Create<System.Object, System.Int32>(Href("~/humans.txt")
-, 1200), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1170), Tuple.Create("\"", 1189)
+, Tuple.Create(Tuple.Create("", 1177), Tuple.Create<System.Object, System.Int32>(Href("~/humans.txt")
+, 1177), false)
 );
 
-WriteLiteral(">(site developer)</a>\r\n            </p>\r\n        </footer>\r\n    </div>\r\n\r\n");
+WriteLiteral(">(site developer)</a>  for any technical assistance.\r\n            </p>\r\n        <" +
+"/footer>\r\n    </div>\r\n\r\n");
 
 WriteLiteral("    ");
 
@@ -229,9 +230,9 @@ Write(Scripts.Render("~/bundles/flot"));
             #line hidden
 WriteLiteral("\r\n    <script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2082), Tuple.Create("\"", 2105)
-, Tuple.Create(Tuple.Create("", 2088), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
-, 2088), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2090), Tuple.Create("\"", 2113)
+, Tuple.Create(Tuple.Create("", 2096), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
+, 2096), false)
 );
 
 WriteLiteral("></script>\r\n");
