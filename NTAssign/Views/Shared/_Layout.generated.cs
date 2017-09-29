@@ -64,10 +64,21 @@ WriteLiteral(" http-equiv=\"X-UA-compatible\"");
 
 WriteLiteral(" content=\"IE=edge, chrome=1\"");
 
-WriteLiteral(">\r\n    <title>");
+WriteLiteral(">\r\n    <link");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 324), Tuple.Create("\"", 344)
+, Tuple.Create(Tuple.Create("", 331), Tuple.Create<System.Object, System.Int32>(Href("~/favicon.ico")
+, 331), false)
+);
+
+WriteLiteral(" rel=\"shortcut icon\"");
+
+WriteLiteral(" type=\"image/x-icon\"");
+
+WriteLiteral(" />\r\n    <title>");
 
             
-            #line 9 "..\..\Views\Shared\_Layout.cshtml"
+            #line 10 "..\..\Views\Shared\_Layout.cshtml"
       Write(ViewBag.Title);
 
             
@@ -78,7 +89,7 @@ WriteLiteral("</title>\r\n");
 WriteLiteral("    ");
 
             
-            #line 10 "..\..\Views\Shared\_Layout.cshtml"
+            #line 11 "..\..\Views\Shared\_Layout.cshtml"
 Write(Styles.Render("~/Content/css"));
 
             
@@ -89,7 +100,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 11 "..\..\Views\Shared\_Layout.cshtml"
+            #line 12 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/modernizr"));
 
             
@@ -100,7 +111,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 12 "..\..\Views\Shared\_Layout.cshtml"
+            #line 13 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("styles", required: false));
 
             
@@ -118,9 +129,9 @@ WriteLiteral(" target=\"_blank\"");
 
 WriteLiteral("><img");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 618), Tuple.Create("\"", 652)
-, Tuple.Create(Tuple.Create("", 624), Tuple.Create<System.Object, System.Int32>(Href("~/Content/banner_waifu2x.png")
-, 624), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 693), Tuple.Create("\"", 727)
+, Tuple.Create(Tuple.Create("", 699), Tuple.Create<System.Object, System.Int32>(Href("~/Content/banner_waifu2x.png")
+, 699), false)
 );
 
 WriteLiteral(" style=\"width: 75%;\"");
@@ -132,7 +143,7 @@ WriteLiteral(" /></a>\r\n");
 WriteLiteral("        ");
 
             
-            #line 17 "..\..\Views\Shared\_Layout.cshtml"
+            #line 18 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -141,7 +152,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; 2009&ndash;");
 
             
-            #line 20 "..\..\Views\Shared\_Layout.cshtml"
+            #line 21 "..\..\Views\Shared\_Layout.cshtml"
                             Write(DateTime.Now.Year);
 
             
@@ -149,20 +160,21 @@ WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; 20
             #line hidden
 WriteLiteral(@" Nanomaterials & Nanostructures Group, Peking University. All rights reserved.</p>
             <p>
-                For scientific issues, contact <b>Prof. Juan Yang, yang_juan(at)pku.edu.cn</b>.<br />
-                For technical assistance, contact <b>Sida Sun, accel(at)pku.edu.cn</b> <a");
+                Please contact <b>Prof. Juan Yang, yang_juan(at)pku.edu.cn</b> for any scientific issues.<br />
+                Please contact <b>Sida Sun, accel(at)pku.edu.cn</b> <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1104), Tuple.Create("\"", 1123)
-, Tuple.Create(Tuple.Create("", 1111), Tuple.Create<System.Object, System.Int32>(Href("~/humans.txt")
-, 1111), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1170), Tuple.Create("\"", 1189)
+, Tuple.Create(Tuple.Create("", 1177), Tuple.Create<System.Object, System.Int32>(Href("~/humans.txt")
+, 1177), false)
 );
 
-WriteLiteral(">(site developer)</a>\r\n            </p>\r\n        </footer>\r\n    </div>\r\n\r\n");
+WriteLiteral(">(site developer)</a>  for any technical assistance.\r\n            </p>\r\n        <" +
+"/footer>\r\n    </div>\r\n\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 28 "..\..\Views\Shared\_Layout.cshtml"
+            #line 29 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -199,7 +211,7 @@ WriteLiteral(@">
 WriteLiteral("    ");
 
             
-            #line 47 "..\..\Views\Shared\_Layout.cshtml"
+            #line 48 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -210,7 +222,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 48 "..\..\Views\Shared\_Layout.cshtml"
+            #line 49 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/flot"));
 
             
@@ -218,9 +230,9 @@ Write(Scripts.Render("~/bundles/flot"));
             #line hidden
 WriteLiteral("\r\n    <script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1993), Tuple.Create("\"", 2016)
-, Tuple.Create(Tuple.Create("", 1999), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
-, 1999), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2090), Tuple.Create("\"", 2113)
+, Tuple.Create(Tuple.Create("", 2096), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
+, 2096), false)
 );
 
 WriteLiteral("></script>\r\n");
@@ -228,7 +240,7 @@ WriteLiteral("></script>\r\n");
 WriteLiteral("    ");
 
             
-            #line 50 "..\..\Views\Shared\_Layout.cshtml"
+            #line 51 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

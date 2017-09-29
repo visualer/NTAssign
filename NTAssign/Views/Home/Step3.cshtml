@@ -3,16 +3,7 @@
 @{
     ViewBag.Title = "Step3";
 }
-@section styles
-{
-    <style>
-        @@media (max-width: 768px) {
-            html, body {
-                min-width: 768px;
-            }
-        }
-    </style>
-}
+
 <h1 class="math">
     Step 3 <small>@Energy.envArr[Model.type]</small>
 </h1>
@@ -48,12 +39,14 @@
             <br />
             <br />
             <p id="resultDiv" class="@( 
-                Model.ar != AssignResult.error ? "alert-success" : "alert-error"
+                Model.ar != AssignResult.error ? "alert-success" : "alert-danger"
                 ) text-center" style="padding: 12px; border-radius: 4px; font-size: 24px;">
                 @Html.Raw(Model.resultString)
             </p>
+           @if (Model.ar != AssignResult.error)
+            {
             <div style="font-size: 18px; border-radius: 4px; border: 2px solid #808080;" class="bottom-div clearfix">
-                @if (Model.pointType == "green")
+               @if (Model.pointType == "green")
                 {
                     <p><font style="color: rgb(12, 180, 15);">&#11046;</font> \(E_{ii}\) vs. \(\omega_\mathrm{RBM}\)</p>
                 }
@@ -81,31 +74,32 @@
                     Laser resonance window: \(\pm100\ \mathrm{meV}\)
                 </p>
             </div>
+            }
         </div>
     </div>
 </div>
 
 @section scripts
 {
-    @{
+        @{
         if (Model.ar != AssignResult.error)
         {
-            var (all, all_label) = Model.All();
-            var (result, result_label) = Model.Result();
-            var (rbm, rbm_label, rbm_pos) = Model.RBM();
+            var all = Model.All();
+            var result = Model.Result();
+            var rbm = Model.RBM();
             <script>
                 var params = {
                     point: @Html.Raw(Model.Point()),
                     pointType: "@Model.pointType",
                     bluePoint: @(Model.BluePoint() ?? "null"),
                     isMetal: @Html.Raw(Model.IsMetal()),
-                    all: @Html.Raw(all),
-                    all_label: @Html.Raw(all_label), //allLabel is rather ugly
-                    result: @Html.Raw(result),
-                    result_label: @Html.Raw(result_label),
-                    rbm: @Html.Raw(rbm),
-                    rbm_label: @Html.Raw(rbm_label),
-                    rbm_pos: @Html.Raw(rbm_pos),
+                    all: @Html.Raw(all.Item1),
+                    all_label: @Html.Raw(all.Item2), //allLabel is rather ugly
+                    result: @Html.Raw(result.Item1),
+                    result_label: @Html.Raw(result.Item2),
+                    rbm: @Html.Raw(rbm.Item1),
+                    rbm_label: @Html.Raw(rbm.Item2),
+                    rbm_pos: @Html.Raw(rbm.Item3),
                     JSLint: "f**k JSLint for 'expression expected' after razor, and I don't want to add trailing comma"
                 };
                 $(drawPlot("plot-placeholder", params));

@@ -238,7 +238,7 @@ namespace NTAssign.Models
                     else
                     {
                         dxmin = -0.030;
-                        dxmax = -0.005;
+                        dxmax = -0.005; // TODO: NOTICE HERE
                     }
                 }
                 pm.result = pm.all
@@ -270,7 +270,7 @@ namespace NTAssign.Models
             pm.result = pm.all
                 .Where(e => (
                 (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) && 
-                pm.point[0] - e[2] >= (dxmin_p ?? -0.040) && pm.point[0] - e[2] <= (dxmax_p ?? 0.010) && 
+                pm.point[0] - e[2] >= (dxmin_p ?? -0.040) && pm.point[0] - e[2] <= (dxmax_p ?? 0.0126) && 
                 pm.point[1] - e[3] <= (dymax_p ?? 0.030) && pm.point[1] - e[3] >= (dymin_p ?? -0.030)
                 ))
                 .ToList();
@@ -300,7 +300,7 @@ namespace NTAssign.Models
             if (pm.result.Count == 0)
             {
                 pm.ar = AssignResult.error;
-                pm.resultString += "Invalid input: out of range. Please check your input.";
+                pm.resultString = "Invalid input: out of range. Please check your input.";
                 return pm;
             }
             pm.resultString += "No match. The possible results include:<br /><font style=\"font-size: 28px;\">";
@@ -314,7 +314,7 @@ namespace NTAssign.Models
         }
 
 
-        public (List<string[]>, List<int[]>, string) GetParams()
+        public Tuple<List<string[]>, List<int[]>, string> GetParams()
         {
             string ToMath(string s) => @"\(" + s + @"\)";
             var arr = new List<string[]>();
@@ -408,7 +408,7 @@ namespace NTAssign.Models
                             ToMath(@"\pm" + param[i, 2].ToString("f3")) });
                     }
                     colspan.Add(new int[] { 5 });
-                    arr.Add(new string[] { @"\(^a\gamma(p)\) is negative for \(M_{ii}^-\), positive for \(M_{ii}^+\).<br />Of \(S_{ii}\), \(\gamma(p)\) is negative for MOD1 when \(i\) is even integer and MOD2 when \(i\) is odd integer, while it is positive for the others.\(\quad" + (s_ ?? "[1][2]") + @"\)" });
+                    arr.Add(new string[] { @"\(^a\)For M-SWNTs, \(\gamma(p)\) is negative for \(M_{ii}^-\) and positive for \(M_{ii}^+\).<br />For MOD1 S-SWNTs, \(\gamma(p)\) is negative when \(i\) is even and positive when \(i\) is odd.<br />For MOD2 S-SWNTs, \(\gamma(p)\) is negative when \(i\) is odd and positive when \(i\) is even.\(\quad" + (s_ ?? "[1][2]") + @"\)" });
                     reflist.Add(1);
                     break;
                 case 3:
@@ -470,7 +470,7 @@ namespace NTAssign.Models
             string refstr = "";
             for (int i = 0; i < reflist.Count; i++)
                 refstr += "<a target='_blank' href='http://doi.org/" + doi[reflist[i]] + "'>[" + (i + 1) + "] " + references[reflist[i]] + (i != reflist.Count - 1 ? "<br /><a/>" : "");
-            return (arr, colspan, refstr);
+            return new Tuple<List<string[]>, List<int[]>, string>(arr, colspan, refstr);
         }
 
     }

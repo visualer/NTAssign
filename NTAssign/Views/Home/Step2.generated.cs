@@ -52,8 +52,7 @@ WriteLiteral("\r\n");
 
 DefineSection("styles", () => {
 
-WriteLiteral("\r\n    <style>\r\n        #chart {\r\n            width: 400px;\r\n            height: 4" +
-"00px;\r\n        }\r\n        \r\n    </style>\r\n");
+WriteLiteral("\r\n    \r\n");
 
 });
 
@@ -64,7 +63,7 @@ WriteLiteral(" class=\"math\"");
 WriteLiteral(">Step 2 <small>");
 
             
-            #line 17 "..\..\Views\Home\Step2.cshtml"
+            #line 11 "..\..\Views\Home\Step2.cshtml"
                           Write(Energy.envArr[Model.Env]);
 
             
@@ -77,7 +76,7 @@ WriteLiteral(" class=\"row\"");
 WriteLiteral(">\r\n");
 
             
-            #line 20 "..\..\Views\Home\Step2.cshtml"
+            #line 14 "..\..\Views\Home\Step2.cshtml"
  using (Html.BeginForm("Step3", "Home", FormMethod.Post, new { name = "formInput", onsubmit = "return validate(this)" }))
 {
     
@@ -85,14 +84,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 22 "..\..\Views\Home\Step2.cshtml"
+            #line 16 "..\..\Views\Home\Step2.cshtml"
 Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 22 "..\..\Views\Home\Step2.cshtml"
+            #line 16 "..\..\Views\Home\Step2.cshtml"
                             
 
             
@@ -115,9 +114,9 @@ WriteLiteral(" style=\"font-size: 16px; padding: 8px; border-radius: 4px;\"");
 WriteLiteral(" class=\"col-lg-9 col-md-11 col-sm-8 col-xs-9 col-lg-offset-1 col-md-offset-0_5 co" +
 "l-sm-offset-1 col-xs-offset-1\"");
 
-WriteLiteral(">\r\n                At least 2 values are required.<br />\r\n                Only pa" +
-"ired transition energies are available in this version.\r\n            </p>\r\n     " +
-"   </div>\r\n        <br />\r\n        <div");
+WriteLiteral(">\r\n                Please input at least 2 values.<br />\r\n                Only pa" +
+"ired transition energies are allowed to input in the current version.\r\n         " +
+"   </p>\r\n        </div>\r\n        <br />\r\n        <div");
 
 WriteLiteral(" class=\"form-group\"");
 
@@ -136,7 +135,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 34 "..\..\Views\Home\Step2.cshtml"
+            #line 28 "..\..\Views\Home\Step2.cshtml"
            Write(Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "slEnv", @class = "form-control selectpicker", disabled = "disabled" }));
 
             
@@ -161,7 +160,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 40 "..\..\Views\Home\Step2.cshtml"
+            #line 34 "..\..\Views\Home\Step2.cshtml"
            Write(Html.DropDownListFor(model => model.P1, ViewBag.slType as List<SelectListItem>, new { id = "slP1", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)"}));
 
             
@@ -182,7 +181,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 44 "..\..\Views\Home\Step2.cshtml"
+            #line 38 "..\..\Views\Home\Step2.cshtml"
            Write(Html.EditorFor(model => model.Val1, new { htmlAttributes = new { id = "edVal1", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
 
             
@@ -211,7 +210,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 51 "..\..\Views\Home\Step2.cshtml"
+            #line 45 "..\..\Views\Home\Step2.cshtml"
            Write(Html.DropDownListFor(model => model.P2, ViewBag.slType as List<SelectListItem>, new { id = "slP2", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)", disabled = "disabled" }));
 
             
@@ -232,7 +231,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 55 "..\..\Views\Home\Step2.cshtml"
+            #line 49 "..\..\Views\Home\Step2.cshtml"
            Write(Html.EditorFor(model => model.Val2, new { htmlAttributes = new { id = "edVal2", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
 
             
@@ -281,7 +280,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 66 "..\..\Views\Home\Step2.cshtml"
+            #line 60 "..\..\Views\Home\Step2.cshtml"
            Write(Html.EditorFor(model => model.RBM, new { htmlAttributes = new { id = "edRBM", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
 
             
@@ -310,7 +309,7 @@ WriteLiteral(" class=\"btn btn-primary\"");
 WriteLiteral(" />\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 76 "..\..\Views\Home\Step2.cshtml"
+            #line 70 "..\..\Views\Home\Step2.cshtml"
 }
 
             
@@ -327,15 +326,18 @@ WriteLiteral(" class=\"table table-striped math\"");
 WriteLiteral(">\r\n");
 
             
-            #line 79 "..\..\Views\Home\Step2.cshtml"
+            #line 73 "..\..\Views\Home\Step2.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 79 "..\..\Views\Home\Step2.cshtml"
+            #line 73 "..\..\Views\Home\Step2.cshtml"
                
-                var (li1, li2, li3) = Model.GetParams();
+                var li = Model.GetParams();
+                var li1 = li.Item1;
+                var li2 = li.Item2;
+                var li3 = li.Item3;
             
             
             #line default
@@ -343,13 +345,13 @@ WriteLiteral(">\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 82 "..\..\Views\Home\Step2.cshtml"
+            #line 79 "..\..\Views\Home\Step2.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 82 "..\..\Views\Home\Step2.cshtml"
+            #line 79 "..\..\Views\Home\Step2.cshtml"
              for (int i = 0; i < li1.Count; i++)
             {
 
@@ -359,13 +361,13 @@ WriteLiteral("\r\n");
 WriteLiteral("                <tr>\r\n");
 
             
-            #line 85 "..\..\Views\Home\Step2.cshtml"
+            #line 82 "..\..\Views\Home\Step2.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 85 "..\..\Views\Home\Step2.cshtml"
+            #line 82 "..\..\Views\Home\Step2.cshtml"
                  for (int j = 0; j < li1[i].Length; j++)
                 {
 
@@ -374,20 +376,20 @@ WriteLiteral("                <tr>\r\n");
             #line hidden
 WriteLiteral("                    <td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 4520), Tuple.Create("", 4539)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 4517), Tuple.Create("", 4536)
             
-            #line 87 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 4529), Tuple.Create<System.Object, System.Int32>(li2[i][j]
+            #line 84 "..\..\Views\Home\Step2.cshtml"
+, Tuple.Create(Tuple.Create("", 4526), Tuple.Create<System.Object, System.Int32>(li2[i][j]
             
             #line default
             #line hidden
-, 4529), false)
+, 4526), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 87 "..\..\Views\Home\Step2.cshtml"
+            #line 84 "..\..\Views\Home\Step2.cshtml"
                                       Write(Html.Raw(li1[i][j]));
 
             
@@ -396,7 +398,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n");
 
             
-            #line 88 "..\..\Views\Home\Step2.cshtml"
+            #line 85 "..\..\Views\Home\Step2.cshtml"
                 }
 
             
@@ -405,7 +407,7 @@ WriteLiteral("</td>\r\n");
 WriteLiteral("                </tr>\r\n");
 
             
-            #line 90 "..\..\Views\Home\Step2.cshtml"
+            #line 87 "..\..\Views\Home\Step2.cshtml"
             }
 
             
@@ -417,20 +419,20 @@ WriteLiteral(" style=\"text-align: left;\"");
 
 WriteLiteral("><td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 4669), Tuple.Create("", 4691)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 4666), Tuple.Create("", 4688)
             
-            #line 91 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 4678), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
+            #line 88 "..\..\Views\Home\Step2.cshtml"
+, Tuple.Create(Tuple.Create("", 4675), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
             
             #line default
             #line hidden
-, 4678), false)
+, 4675), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 91 "..\..\Views\Home\Step2.cshtml"
+            #line 88 "..\..\Views\Home\Step2.cshtml"
                                                                Write(Html.Raw(li3));
 
             
@@ -443,7 +445,7 @@ DefineSection("scripts", () => {
 WriteLiteral("\r\n<script>\r\n    $(page2Load(");
 
             
-            #line 98 "..\..\Views\Home\Step2.cshtml"
+            #line 95 "..\..\Views\Home\Step2.cshtml"
             Write(Html.Raw(Model.Env));
 
             

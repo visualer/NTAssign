@@ -8,13 +8,13 @@
         Peking University,
         Beijing, 100871 China
 
-# THANKS
+# ADVISORS AND CO-AUTHORS
 
-    Prof. Juan Yang, Daqi Zhang, Yuecong Hu, Chenmaya Xia
+    Prof. Yan Li, Prof. Juan Yang*, Daqi Zhang, Yuecong Hu, Chenmaya Xia
 
 # TECHNOLOGY COLOPHON
 
-    ASP.NET MVC 4, C# 7 (.NET 4.7)
+    ASP.NET MVC 4, .NET 4.6.1 (C#)
     CSS3, HTML5
     jQuery, Modernizr, Normalize.css, Bootstrap, Bootstrap-select, Respond.js, Glyphicons
     Flot.js, MathJax
