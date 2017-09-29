@@ -158,14 +158,60 @@ WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; 20
             
             #line default
             #line hidden
-WriteLiteral(@" Nanomaterials & Nanostructures Group, Peking University. All rights reserved.</p>
+WriteLiteral(" Nanomaterials & Nanostructures Group, Peking University. All rights reserved.</p" +
+">\r\n            <p");
+
+WriteLiteral(" style=\"font-weight: bold;\"");
+
+WriteLiteral(">\r\n                Total visitors:\r\n                <script");
+
+WriteLiteral(" type=\"text/javascript\"");
+
+WriteLiteral(@">
+                    var sc_project = 11459189;
+                    var sc_invisible = 0;
+                    var sc_security = ""2c749830"";
+                    var sc_text = 2;
+                    var scJsHost = ((""https:"" == document.location.protocol) ?
+                        ""https://secure."" : ""http://www."");
+                    document.write(""<sc"" + ""ript type='text/javascript' src='"" +
+                        scJsHost +
+                        ""statcounter.com/counter/counter.js'></"" + ""script>"");
+                </script>
+                <noscript>
+                    <div");
+
+WriteLiteral(" class=\"statcounter\"");
+
+WriteLiteral(">\r\n                        <a");
+
+WriteLiteral(" title=\"Web Analytics\"");
+
+WriteLiteral("\r\n                           href=\"http://statcounter.com/\"");
+
+WriteLiteral(" target=\"_blank\"");
+
+WriteLiteral(">\r\n                            <img");
+
+WriteLiteral(" class=\"statcounter\"");
+
+WriteLiteral("\r\n                                 src=\"//c.statcounter.com/11459189/0/2c749830/0" +
+"/\"");
+
+WriteLiteral("\r\n                                 alt=\"Web Analytics\"");
+
+WriteLiteral(@">
+                        </a>
+                    </div>
+                </noscript>
+            </p>
             <p>
                 Please contact <b>Prof. Juan Yang, yang_juan(at)pku.edu.cn</b> for any scientific issues.<br />
                 Please contact <b>Sida Sun, accel(at)pku.edu.cn</b> <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1170), Tuple.Create("\"", 1189)
-, Tuple.Create(Tuple.Create("", 1177), Tuple.Create<System.Object, System.Int32>(Href("~/humans.txt")
-, 1177), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 2340), Tuple.Create("\"", 2359)
+, Tuple.Create(Tuple.Create("", 2347), Tuple.Create<System.Object, System.Int32>(Href("~/humans.txt")
+, 2347), false)
 );
 
 WriteLiteral(">(site developer)</a>  for any technical assistance.\r\n            </p>\r\n        <" +
@@ -174,7 +220,7 @@ WriteLiteral(">(site developer)</a>  for any technical assistance.\r\n          
 WriteLiteral("    ");
 
             
-            #line 29 "..\..\Views\Shared\_Layout.cshtml"
+            #line 53 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -211,7 +257,7 @@ WriteLiteral(@">
 WriteLiteral("    ");
 
             
-            #line 48 "..\..\Views\Shared\_Layout.cshtml"
+            #line 72 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -222,7 +268,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 49 "..\..\Views\Shared\_Layout.cshtml"
+            #line 73 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/flot"));
 
             
@@ -230,9 +276,9 @@ Write(Scripts.Render("~/bundles/flot"));
             #line hidden
 WriteLiteral("\r\n    <script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2090), Tuple.Create("\"", 2113)
-, Tuple.Create(Tuple.Create("", 2096), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
-, 2096), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 3260), Tuple.Create("\"", 3283)
+, Tuple.Create(Tuple.Create("", 3266), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
+, 3266), false)
 );
 
 WriteLiteral("></script>\r\n");
@@ -240,7 +286,7 @@ WriteLiteral("></script>\r\n");
 WriteLiteral("    ");
 
             
-            #line 51 "..\..\Views\Shared\_Layout.cshtml"
+            #line 75 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

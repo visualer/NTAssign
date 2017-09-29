@@ -43,7 +43,7 @@ WriteLiteral("\r\n");
             
             #line 3 "..\..\Views\Home\Step1.cshtml"
   
-    ViewBag.Title = "Step1";
+    ViewBag.Title = "CNT Assign";
 
             
             #line default

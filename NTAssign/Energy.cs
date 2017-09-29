@@ -281,6 +281,9 @@ namespace NTAssign
                 List<double[]> t = new List<double[]>();
                 if (IsMetal(p_lesser))
                 {
+                    // fix the bug which leads to large rbm returning to the smaller
+                    if (p_lesser >= 6 && rbm > 200)
+                        break;
                     double plus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, 0); //should it be higher?
                     double minus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, -1);
                     t.Add(new double[] { (plus + minus) / 2, plus - minus });
