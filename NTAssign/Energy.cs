@@ -161,7 +161,7 @@ namespace NTAssign
                     {
                         if (e.ParamName == "dt")
                             return null;
-                        else throw e;
+                        else throw;
                     }
                 }
                 else
@@ -187,7 +187,7 @@ namespace NTAssign
                     {
                         if (e.ParamName == "dt")
                             return null;
-                        else throw e;
+                        else throw;
                     }
                 }
             }
@@ -263,7 +263,7 @@ namespace NTAssign
                         catch (ArgumentOutOfRangeException e)
                         {
                             if (e.ParamName != "result" && e.ParamName != "dt")
-                                throw e;
+                                throw;
                         }
                     }
             }
@@ -286,7 +286,7 @@ namespace NTAssign
                         catch (ArgumentOutOfRangeException e)
                         {
                             if (e.ParamName != "result" && e.ParamName != "dt")
-                                throw e;
+                                throw;
                         }
                     }
             }
@@ -331,7 +331,7 @@ namespace NTAssign
                 {
                     if (e.ParamName == "dt")
                         break; // rbm increases, dt decreases
-                    else throw e;
+                    else throw;
                 }
             }
             return d;

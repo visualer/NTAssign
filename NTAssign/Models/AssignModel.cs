@@ -76,7 +76,7 @@ namespace NTAssign.Models
                     resultString += "Invalid input: out of range.";
                     return new PlotModel() { ar = AssignResult.error, resultString = resultString };
                 }
-                else throw e;
+                else throw;
             }
             if ((IsMetal(p) && (mod2 == -1)) || (!IsMetal(p) && (p > p2)))
             {
