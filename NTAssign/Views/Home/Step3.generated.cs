@@ -155,17 +155,17 @@ WriteLiteral(">\r\n            <br />\r\n            <br />\r\n            <p");
 
 WriteLiteral(" id=\"resultDiv\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1704), Tuple.Create("\"", 1829)
+WriteAttribute("class", Tuple.Create(" class=\"", 1704), Tuple.Create("\"", 1877)
             
             #line 41 "..\..\Views\Home\Step3.cshtml"
 , Tuple.Create(Tuple.Create("", 1712), Tuple.Create<System.Object, System.Int32>( 
-                Model.ar != AssignResult.error ? "alert-success" : "alert-danger"
+                (Model.ar != AssignResult.error && Model.ar != AssignResult.completelynomatch) ? "alert-success" : "alert-danger"
                 
             
             #line default
             #line hidden
 , 1712), false)
-, Tuple.Create(Tuple.Create(" ", 1817), Tuple.Create("text-center", 1818), true)
+, Tuple.Create(Tuple.Create(" ", 1865), Tuple.Create("text-center", 1866), true)
 );
 
 WriteLiteral(" style=\"padding: 12px; border-radius: 4px; font-size: 24px;\"");

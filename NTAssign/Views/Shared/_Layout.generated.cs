@@ -158,69 +158,43 @@ WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; 20
             
             #line default
             #line hidden
-WriteLiteral(" Nanomaterials & Nanostructures Group, Peking University. All rights reserved.</p" +
-">\r\n            <p");
-
-WriteLiteral(" style=\"font-weight: bold;\"");
-
-WriteLiteral(">\r\n                Total visitors:\r\n                <script");
-
-WriteLiteral(" type=\"text/javascript\"");
-
-WriteLiteral(@">
-                    var sc_project = 11459189;
-                    var sc_invisible = 0;
-                    var sc_security = ""2c749830"";
-                    var sc_text = 2;
-                    var scJsHost = ((""https:"" == document.location.protocol) ?
-                        ""https://secure."" : ""http://www."");
-                    document.write(""<sc"" + ""ript type='text/javascript' src='"" +
-                        scJsHost +
-                        ""statcounter.com/counter/counter.js'></"" + ""script>"");
-                </script>
-                <noscript>
-                    <div");
-
-WriteLiteral(" class=\"statcounter\"");
-
-WriteLiteral(">\r\n                        <a");
-
-WriteLiteral(" title=\"Web Analytics\"");
-
-WriteLiteral("\r\n                           href=\"http://statcounter.com/\"");
-
-WriteLiteral(" target=\"_blank\"");
-
-WriteLiteral(">\r\n                            <img");
-
-WriteLiteral(" class=\"statcounter\"");
-
-WriteLiteral("\r\n                                 src=\"//c.statcounter.com/11459189/0/2c749830/0" +
-"/\"");
-
-WriteLiteral("\r\n                                 alt=\"Web Analytics\"");
-
-WriteLiteral(@">
-                        </a>
-                    </div>
-                </noscript>
-            </p>
+WriteLiteral(@" Nanomaterials & Nanostructures Group, Peking University. All rights reserved.</p>
             <p>
                 Please contact <b>Prof. Juan Yang, yang_juan(at)pku.edu.cn</b> for any scientific issues.<br />
                 Please contact <b>Sida Sun, accel(at)pku.edu.cn</b> <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2340), Tuple.Create("\"", 2359)
-, Tuple.Create(Tuple.Create("", 2347), Tuple.Create<System.Object, System.Int32>(Href("~/humans.txt")
-, 2347), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 1170), Tuple.Create("\"", 1189)
+, Tuple.Create(Tuple.Create("", 1177), Tuple.Create<System.Object, System.Int32>(Href("~/humans.txt")
+, 1177), false)
 );
 
-WriteLiteral(">(site developer)</a>  for any technical assistance.\r\n            </p>\r\n        <" +
-"/footer>\r\n    </div>\r\n\r\n");
+WriteLiteral(">(site developer)</a>  for any technical assistance.\r\n            </p>\r\n         " +
+"   <p><br /></p>\r\n            <div");
+
+WriteLiteral(" align=\'center\'");
+
+WriteLiteral("><a");
+
+WriteLiteral(" href=\'http://www.hit-counts.com\'");
+
+WriteLiteral("><img");
+
+WriteLiteral(" src=\'http://www.hit-counts.com/counter.php?t=MTQxNzMzNQ==\'");
+
+WriteLiteral(" border=\'0\'");
+
+WriteLiteral(" alt=\'Web Counter\'");
+
+WriteLiteral("></a><BR><a");
+
+WriteLiteral(" href=\'http://www.hit-counts.com\'");
+
+WriteLiteral(">Web Counter</a></div>\r\n        </footer>\r\n    </div>\r\n\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 53 "..\..\Views\Shared\_Layout.cshtml"
+            #line 31 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -257,7 +231,7 @@ WriteLiteral(@">
 WriteLiteral("    ");
 
             
-            #line 72 "..\..\Views\Shared\_Layout.cshtml"
+            #line 50 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -268,7 +242,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 73 "..\..\Views\Shared\_Layout.cshtml"
+            #line 51 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/flot"));
 
             
@@ -276,9 +250,9 @@ Write(Scripts.Render("~/bundles/flot"));
             #line hidden
 WriteLiteral("\r\n    <script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 3260), Tuple.Create("\"", 3283)
-, Tuple.Create(Tuple.Create("", 3266), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
-, 3266), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2345), Tuple.Create("\"", 2368)
+, Tuple.Create(Tuple.Create("", 2351), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
+, 2351), false)
 );
 
 WriteLiteral("></script>\r\n");
@@ -286,13 +260,20 @@ WriteLiteral("></script>\r\n");
 WriteLiteral("    ");
 
             
-            #line 75 "..\..\Views\Shared\_Layout.cshtml"
+            #line 53 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n</body>\r\n</html>\r\n");
+WriteLiteral("\r\n    <!-- Global Site Tag (gtag.js) - Google Analytics -->\r\n    <script async");
+
+WriteLiteral(" src=\"https://www.googletagmanager.com/gtag/js?id=UA-107272975-1\"");
+
+WriteLiteral("></script>\r\n    <script>\r\n        window.dataLayer = window.dataLayer || [];\r\n   " +
+"     function gtag() { dataLayer.push(arguments) };\r\n        gtag(\'js\', new Date" +
+"());\r\n\r\n        gtag(\'config\', \'UA-107272975-1\');\r\n    </script>\r\n</body>\r\n</htm" +
+"l>\r\n");
 
         }
     }

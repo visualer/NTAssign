@@ -19,34 +19,12 @@
         <hr />
         <footer>
             <p>&copy; 2009&ndash;@DateTime.Now.Year Nanomaterials & Nanostructures Group, Peking University. All rights reserved.</p>
-            <p style="font-weight: bold;">
-                Total visitors:
-                <script type="text/javascript">
-                    var sc_project = 11459189;
-                    var sc_invisible = 0;
-                    var sc_security = "2c749830";
-                    var sc_text = 2;
-                    var scJsHost = (("https:" == document.location.protocol) ?
-                        "https://secure." : "http://www.");
-                    document.write("<sc" + "ript type='text/javascript' src='" +
-                        scJsHost +
-                        "statcounter.com/counter/counter.js'></" + "script>");
-                </script>
-                <noscript>
-                    <div class="statcounter">
-                        <a title="Web Analytics"
-                           href="http://statcounter.com/" target="_blank">
-                            <img class="statcounter"
-                                 src="//c.statcounter.com/11459189/0/2c749830/0/"
-                                 alt="Web Analytics">
-                        </a>
-                    </div>
-                </noscript>
-            </p>
             <p>
                 Please contact <b>Prof. Juan Yang, yang_juan(at)pku.edu.cn</b> for any scientific issues.<br />
                 Please contact <b>Sida Sun, accel(at)pku.edu.cn</b> <a href="~/humans.txt">(site developer)</a>  for any technical assistance.
             </p>
+            <p><br /></p>
+            <div align='center'><a href='http://www.hit-counts.com'><img src='http://www.hit-counts.com/counter.php?t=MTQxNzMzNQ==' border='0' alt='Web Counter'></a><BR><a href='http://www.hit-counts.com'>Web Counter</a></div>
         </footer>
     </div>
 
@@ -73,6 +51,14 @@
     @Scripts.Render("~/bundles/flot")
     <script src="~/Scripts/main.js"></script>
     @RenderSection("scripts", required: false)
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107272975-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments) };
+        gtag('js', new Date());
 
+        gtag('config', 'UA-107272975-1');
+    </script>
 </body>
 </html>

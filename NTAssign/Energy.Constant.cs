@@ -10,7 +10,8 @@ namespace NTAssign
         accurate = 0,
         possible = 1,
         impossible = 2,
-        error = 3
+        error = 3,
+        completelynomatch = 4
     };
 
     public static partial class Energy

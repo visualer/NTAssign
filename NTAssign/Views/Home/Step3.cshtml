@@ -39,7 +39,7 @@
             <br />
             <br />
             <p id="resultDiv" class="@( 
-                Model.ar != AssignResult.error ? "alert-success" : "alert-danger"
+                (Model.ar != AssignResult.error && Model.ar != AssignResult.completelynomatch) ? "alert-success" : "alert-danger"
                 ) text-center" style="padding: 12px; border-radius: 4px; font-size: 24px;">
                 @Html.Raw(Model.resultString)
             </p>

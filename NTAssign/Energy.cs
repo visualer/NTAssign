@@ -30,7 +30,9 @@ namespace NTAssign
             {
                 if (p >= 9)
                     throw new ArgumentOutOfRangeException("higher than S66 not available");
-                
+                double deriative = -param[p, 0] / (dt * dt) + 2 * param[p, 1] / (dt * dt * dt);
+                if (deriative > 0) // 1st deriative
+                    throw new ArgumentOutOfRangeException("dt", "dt is too small" + deriative);
                 if (IsMetal(p))
                     r = param[p, 0] / dt - param[p, 1] / (dt * dt) + param[p, 2] / (dt * dt) * cos3Theta * (mod * 2 + 1);
                 // mod * 2 + 1 <==> mod == 0 ? 1 : -1
@@ -82,7 +84,8 @@ namespace NTAssign
             {
                 if (p >= 9)
                     throw new ArgumentOutOfRangeException("higher than S66 not available");
-
+                // the cos3theta got from this function are always reused in GetEnergy, so don't worry if the
+                // dt exception is not throwed.
                 val += (type == 1) ? 0.04 : ((type == 2) ? 0.1 : 0);
                 if (IsMetal(p))
                 {
@@ -150,14 +153,23 @@ namespace NTAssign
                     double cos3Theta = dt * dt * splitting / 2 * param[p_lesser, 2];
                     if (cos3Theta < 0 || cos3Theta > 1)
                         return null;
-                    return (GetEnergy_Cos3Theta(dt, cos3Theta, p_lesser, type, -1) + GetEnergy_Cos3Theta(dt, cos3Theta, p_lesser, type, 0)) / 2;
+                    try
+                    {
+                        return (GetEnergy_Cos3Theta(dt, cos3Theta, p_lesser, type, -1) + GetEnergy_Cos3Theta(dt, cos3Theta, p_lesser, type, 0)) / 2;
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        if (e.ParamName == "dt")
+                            return null;
+                        else throw e;
+                    }
                 }
                 else
                 {
                     int p_larger = p_lesser + 1;
                     double delta(int x) => param[p_larger, x] - param[p_lesser, x];
                     int mod = 1;
-                    double cos3Theta = (splitting * dt * dt - delta(0) * dt + delta(1)) / 
+                    double cos3Theta = (splitting * dt * dt - delta(0) * dt + delta(1)) /
                         (param[p_larger, 2] * (((p_larger % 3) == (mod % 2)) ? -1 : 1) -
                         param[p_lesser, 2] * (((p_lesser % 3) == (mod % 2)) ? -1 : 1));
                     if (cos3Theta < 0)
@@ -167,7 +179,16 @@ namespace NTAssign
                     }
                     if (cos3Theta > 1)
                         return null;
-                    return (GetEnergy_Cos3Theta(dt, cos3Theta, p_larger, type, mod) + GetEnergy_Cos3Theta(dt, cos3Theta, p_lesser, type, mod)) / 2;
+                    try
+                    {
+                        return (GetEnergy_Cos3Theta(dt, cos3Theta, p_larger, type, mod) + GetEnergy_Cos3Theta(dt, cos3Theta, p_lesser, type, mod)) / 2;
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        if (e.ParamName == "dt")
+                            return null;
+                        else throw e;
+                    }
                 }
             }
             else if (type == 3)
@@ -241,7 +262,7 @@ namespace NTAssign
                         }
                         catch (ArgumentOutOfRangeException e)
                         {
-                            if (e.ParamName != "result")
+                            if (e.ParamName != "result" && e.ParamName != "dt")
                                 throw e;
                         }
                     }
@@ -264,7 +285,7 @@ namespace NTAssign
                         }
                         catch (ArgumentOutOfRangeException e)
                         {
-                            if (e.ParamName != "result")
+                            if (e.ParamName != "result" && e.ParamName != "dt")
                                 throw e;
                         }
                     }
@@ -279,31 +300,38 @@ namespace NTAssign
             {
                 double dt = RBMtoDt(rbm, p_lesser, type);
                 List<double[]> t = new List<double[]>();
-                if (IsMetal(p_lesser))
+                try
                 {
-                    // fix the bug which leads to large rbm returning to the smaller
-                    if (p_lesser >= 6 && rbm > 200)
-                        break;
-                    double plus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, 0); //should it be higher?
-                    double minus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, -1);
-                    t.Add(new double[] { (plus + minus) / 2, plus - minus });
-                    plus = GetEnergy_Cos3Theta(dt, -cos3ThetaMax, p_lesser, type, 0);
-                    minus = GetEnergy_Cos3Theta(dt, -cos3ThetaMax, p_lesser, type, -1);
-                    t.Add(new double[] { (plus + minus) / 2, plus - minus });
-                    d.Add(rbm, t.ToArray());
+                    if (IsMetal(p_lesser))
+                    {
+                        // fix the bug which leads to large rbm returning to the smalle
+                        double plus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, 0); //should it be higher?
+                        double minus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, -1);
+                        t.Add(new double[] { (plus + minus) / 2, plus - minus });
+                        plus = GetEnergy_Cos3Theta(dt, -cos3ThetaMax, p_lesser, type, 0);
+                        minus = GetEnergy_Cos3Theta(dt, -cos3ThetaMax, p_lesser, type, -1);
+                        t.Add(new double[] { (plus + minus) / 2, plus - minus });
+                        d.Add(rbm, t.ToArray());
+                    }
+                    else
+                    {
+                        double plus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser + 1, type, 1); //should it be higher?
+                        double minus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, 1);
+                        t.Add(new double[] { (plus + minus) / 2, plus - minus });
+                        plus = GetEnergy_Cos3Theta(dt, 0, p_lesser + 1, type, 2);
+                        minus = GetEnergy_Cos3Theta(dt, 0, p_lesser, type, 2);
+                        t.Add(new double[] { (plus + minus) / 2, plus - minus });
+                        plus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser + 1, type, 2);
+                        minus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, 2);
+                        t.Add(new double[] { (plus + minus) / 2, plus - minus });
+                        d.Add(rbm, t.ToArray());
+                    }
                 }
-                else
+                catch (ArgumentOutOfRangeException e)
                 {
-                    double plus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser + 1, type, 1); //should it be higher?
-                    double minus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, 1);
-                    t.Add(new double[] { (plus + minus) / 2, plus - minus });
-                    plus = GetEnergy_Cos3Theta(dt, 0, p_lesser + 1, type, 2);
-                    minus = GetEnergy_Cos3Theta(dt, 0, p_lesser, type, 2);
-                    t.Add(new double[] { (plus + minus) / 2, plus - minus });
-                    plus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser + 1, type, 2);
-                    minus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, 2);
-                    t.Add(new double[] { (plus + minus) / 2, plus - minus });
-                    d.Add(rbm, t.ToArray());
+                    if (e.ParamName == "dt")
+                        break; // rbm increases, dt decreases
+                    else throw e;
                 }
             }
             return d;

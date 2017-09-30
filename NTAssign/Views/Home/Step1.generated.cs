@@ -131,12 +131,25 @@ WriteLiteral(" />\r\n            </div>\r\n            <div");
 WriteLiteral(" class=\"col-lg-offset-0_5 col-lg-4 col-md-offset-0 col-md-3 col-sm-offset-0_5 mar" +
 "gin-xs-top col-xs-12 col-xs-offset-0_5\"");
 
-WriteLiteral(">\r\n                <h4>Update Log</h4>\r\n                <p>\r\n                    " +
-"<b>1.0.0_beta &mdash; 2017/9/25</b><br />\r\n                    - First release.\r" +
-"\n                </p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
+WriteLiteral(" style=\"height: 100px; overflow-y: scroll;\"");
+
+WriteLiteral(@">
+                <h4>Update Log</h4>
+                <p>
+                    <b>1.0.1_beta &mdash; 2017/9/30</b><br />
+                    - Small adjustment. Fixed: diameter minimum when \(p\lt6\) 
+                </p>
+                <p>
+                    <b>1.0.0_beta &mdash; 2017/9/25</b><br />
+                    - First release.
+                </p>
+            </div>
+        </div>
+    </div>
+");
 
             
-            #line 38 "..\..\Views\Home\Step1.cshtml"
+            #line 42 "..\..\Views\Home\Step1.cshtml"
 }
 
             

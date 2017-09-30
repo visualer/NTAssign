@@ -25,7 +25,7 @@ namespace NTAssign.Models
             if (Val1 is null && Val2 is null)
             {
                 pm = null;
-                return AssignResult.error;
+                throw new UnauthorizedAccessException();
             }
             else if (Val1 is null || Val2 is null)
                 return (pm = E1R1()).ar;
@@ -64,7 +64,20 @@ namespace NTAssign.Models
                 p2 = IsMetal(p + 1) ? p - 1 : p + 1;
                 mod2 = cos[0] == -1 ? 2 : 1; // == mod1
             }
-            double val2 = GetEnergy_Cos3Theta(dt, cos[0] == -1 ? cos[1] : cos[0], p2, type, mod2);
+            double val2;
+            try
+            {
+                val2 = GetEnergy_Cos3Theta(dt, cos[0] == -1 ? cos[1] : cos[0], p2, type, mod2);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                if (e.ParamName == "dt")
+                {
+                    resultString += "Invalid input: out of range.";
+                    return new PlotModel() { ar = AssignResult.error, resultString = resultString };
+                }
+                else throw e;
+            }
             if ((IsMetal(p) && (mod2 == -1)) || (!IsMetal(p) && (p > p2)))
             {
                 Swap(ref p, ref p2);
@@ -299,7 +312,7 @@ namespace NTAssign.Models
             // use the green 
             if (pm.result.Count == 0)
             {
-                pm.ar = AssignResult.error;
+                pm.ar = AssignResult.completelynomatch;
                 pm.resultString = "Invalid input: out of range. Please check your input.";
                 return pm;
             }
@@ -350,19 +363,23 @@ namespace NTAssign.Models
                 "10.1038/nature08116",
                 "10.1016/j.cplett.2007.03.085"
             };
+            bool hasDelta = false;
             switch (Env)
             {
-                case 0:
                 case 1:
                 case 2:
+                    hasDelta = true;
+                    goto case 0;
+                case 0:
                     colspan.Add(new int[] { 5 });
-                    arr.Add(new string[] { @"$$\begin{align*}E_{ii}(p)=\frac{\alpha(p)}{d_t}-\frac{\beta(p)}{d_t^2}+\frac{\gamma(p)}{d_t^2}\cos(3\theta)\quad[1]\end{align*}$$" });
+                    arr.Add(new string[] { @"$$\begin{align*}E_{ii}(p)=\frac{\alpha(p)}{d_t}-\frac{\beta(p)}{d_t^2}+\frac{\gamma(p)}{d_t^2}\cos(3\theta)" + (hasDelta ? @"-\Delta" : @"\quad[1]") + @"\end{align*}$$" });
                     reflist.Add(2);
                     break;
                 case 3:
                     colspan.Add(new int[] { 4 });
                     arr.Add(new string[] { @"$$\begin{align*}E_{ii}(p)=a\frac{p}{d_t}(1+b\log\frac{c}{p/d_t})+\frac{\beta_p}{d_t^2}\cos(3\theta)+\Delta(p)\end{align*}$$" +
-                        @"\(a=1.074\ \mathrm{eV\ nm},b=0.467\ \mathrm{nm^{-1}},c=0.812\ \mathrm{nm^{-1}}\)" + "<br />" + @"Only when \(p\lt3\), \(\Delta(p)=0.059p/d_t\ \mathrm{eV}\quad[1]\)"});
+                        @"\(a=1.074\ \mathrm{eV\ nm},b=0.467\ \mathrm{nm^{-1}},c=0.812\ \mathrm{nm^{-1}}\)" + "<br />" + @"\(p\lt3:\ \Delta(p)=0.059p/d_t\ \mathrm{eV}\)" + "<br />" +
+                        @"\(p\ge3:\ \Delta(p)=0\quad[1]\)"});
                     reflist.Add(8);
                     break;
                 case 4:
@@ -376,11 +393,11 @@ namespace NTAssign.Models
             switch (Env)
             {
                 case 1:
-                    arr[0][0] += @"All \(E_{ii}\) are \(40\ \mathrm{meV}\) redshifted from " + envArr[1] + @" (below).\(\quad[2]\)";
+                    arr[0][0] += @"\(\Delta=40\ \mathrm{meV}\quad[1][2]\)";
                     reflist.Add(4);
                     break;
                 case 2:
-                    arr[0][0] += @"All \(E_{ii}\) are \(100\ \mathrm{meV}\) redshifted from " + envArr[1] + @" (below).\(\quad[2]\)";
+                    arr[0][0] += @"\(\Delta=100\ \mathrm{meV}\quad[1][2]\)";
                     reflist.Add(6);
                     break;
                 case 5:
