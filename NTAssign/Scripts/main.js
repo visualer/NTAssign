@@ -77,9 +77,9 @@ function page1Load() {
     $("#selectEnv").on('changed.bs.select', clearTitle);
 }
 
-function page2Load(env) {
+function page2Load() {
     //document.formInput.reset();
-    var thres, $slp = $(".slp"), $another = $("#slP2");
+    var $slp = $(".slp"), $another = $("#slP2");
     $slp.find("option").removeAttr("selected");
     $slp.selectpicker("refresh");
     regClear();

@@ -56,11 +56,11 @@ WriteLiteral(">\r\n    (n,m) Assignment Program for SWNTs Under Complex Environm
 
 WriteLiteral(" class=\"text-center\"");
 
-WriteLiteral(">\r\n    According to: <a");
+WriteLiteral(">\r\n    Refer to: <a");
 
 WriteLiteral(" href=\"http://pubs.acs.org/doi/10.1021/acsnano.7b05860\"");
 
-WriteLiteral("><b>DOI:</b> 10.1021/acsnano.7b05860</a>\r\n</h4>\r\n<h4");
+WriteLiteral("><i>ACS Nano</i>, <b>2017</b>, <i>11</i> (10), pp 10509–10518</a>\r\n</h4>\r\n<h4");
 
 WriteLiteral(" class=\"text-center\"");
 
@@ -143,8 +143,8 @@ WriteLiteral(" style=\"height: 200px; overflow-y: auto;\"");
 WriteLiteral(@">
                 <h4>Update Log</h4>
                 <p>
-                    <b>v1.0.1-beta &mdash; 2017/9/30</b><br />
-                    - Minor adjustment. Fixed: energy function for air-suspended related type isn't monotonic.
+                    <b>v1.0.1-beta &mdash; 2017/10/29</b><br />
+                    - Minor adjustment.
                 </p>
                 <p>
                     <b>v1.0.0-beta &mdash; 2017/9/25</b><br />
