@@ -20,7 +20,7 @@ namespace NTAssign.Models
         public double? Val2 { get; set; }
         public double? RBM { get; set; }
 
-        public AssignResult GetPlotModel(out PlotModel pm)
+        public AssignResult GetPlotModel(out PlotModel[] pm)
         {
             if (Val1 is null && Val2 is null)
             {
@@ -28,9 +28,11 @@ namespace NTAssign.Models
                 throw new UnauthorizedAccessException();
             }
             else if (Val1 is null || Val2 is null)
-                return (pm = E1R1()).ar;
+                return (pm = new PlotModel[] { E1R1() })[0].ar;
             else
-                return (pm = E2()).ar;
+            {
+                return (pm = E2())[0].ar;
+            }
         }
         // sqrt log exceptions
         public PlotModel E1R1()
@@ -98,7 +100,7 @@ namespace NTAssign.Models
         }
 
 
-        public PlotModel E2()
+        public PlotModel[] E2()
         {
             string resultString = "";
             int p1 = pArr_p1[P1], p2 = pArr_p1[P2];
@@ -124,7 +126,7 @@ namespace NTAssign.Models
                 else if (RBM.HasValue)
                     resultString += "Invald input: out of range. Please check your input RBM value. Only transition energies are processed. " +
                         "<br/ >";
-                return Assign(new PlotModel()
+                return new PlotModel[] { Assign(new PlotModel()
                 {
                     point = new double[] { (val1 + val2) / 2, val2 - val1 },
                     p_lesser = p1,
@@ -132,11 +134,19 @@ namespace NTAssign.Models
                     pointType = "red",
                     bluePoint = bluePoint,
                     p1_lesser = p1_,
-                    resultString = resultString,
-                });
+                    resultString = resultString
+
+                }) };
 
             }
-            else throw new NotImplementedException();
+            else
+            {
+                throw new NotImplementedException();
+                /*AssignModel as1 = new AssignModel() { Env = Env, P1 = P1, P2 = -1, RBM = RBM, Val1 = Val1, Val2 = Val2 };
+                AssignModel as2 = new AssignModel() { Env = Env, P1 = -1, P2 = P2, RBM = RBM, Val1 = Val1, Val2 = Val2 };
+                PlotModel pm1 = as1.E1R1();
+                PlotModel pm2 = as2.E1R1();*/
+            }
             #region comment
             /*else
             {
@@ -174,7 +184,6 @@ namespace NTAssign.Models
                         double val2_pair = GetEnergy_Cos3Theta(dt, cos3Theta, p2, type, -mod2 - 1);
                         AssignResult ar1 = Assign(new double[] { (val1 + val1_pair) / 2, (val2 - val1) * (mod1 == 0 ? -1 : 1) }, p1, type, out List<double[]> result1, out List<double[]> all1);
                         AssignResult ar2 = Assign(new double[] { (val1 + val2_pair) / 2, (val2 - val1) * (mod1 == 0 ? -1 : 1) }, p2, type, out List<double[]> result2, out List<double[]> all2);
-
                     }
                     else
                     {
@@ -211,7 +220,6 @@ namespace NTAssign.Models
                         double val2_pair = GetEnergy_Cos3Theta(dt, cos3Theta, p2, type, -mod2 - 1);
                         AssignResult ar1 = Assign(new double[] { (val1 + val1_pair) / 2, (val2 - val1) * (mod1 == 0 ? -1 : 1) }, p1, type, out List<double[]> result1, out List<double[]> all1);
                         AssignResult ar2 = Assign(new double[] { (val1 + val2_pair) / 2, (val2 - val1) * (mod1 == 0 ? -1 : 1) }, p2, type, out List<double[]> result2, out List<double[]> all2);
-
                     }
                 }
                 else if (type == 3)
@@ -225,6 +233,7 @@ namespace NTAssign.Models
                 }
             }*/
             #endregion
+
         }
 
         public PlotModel Assign(PlotModel pm, int mod = -1)

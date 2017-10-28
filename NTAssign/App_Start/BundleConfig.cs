@@ -4,13 +4,6 @@ using System.Web.Optimization;
 
 namespace NTAssign
 {
-    public class AsIsBundleOrderer : IBundleOrderer
-    {
-        public virtual IEnumerable<BundleFile> OrderFiles(BundleContext context, IEnumerable<BundleFile> files)
-        {
-            return files;
-        }
-    }
     public class BundleConfig
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
@@ -35,7 +28,6 @@ namespace NTAssign
             bundles.Add(new ScriptBundle("~/bundles/flot").Include(
                       "~/Scripts/flot/jquery.flot.js",
                       "~/Scripts/flot/jquery.flot*"));
-
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

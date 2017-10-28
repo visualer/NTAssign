@@ -36,6 +36,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -194,6 +196,7 @@
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\ApplicationInsights.config" />
+    <Content Include="bin\ensureRedirect.xml" />
     <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
     <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
     <Content Include="bin\Microsoft.AI.DependencyCollector.xml" />
@@ -211,13 +214,20 @@
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\Microsoft.Diagnostics.Tracing.EventSource.dll" />
+    <Content Include="bin\Microsoft.Diagnostics.Tracing.EventSource.XML" />
     <Content Include="bin\Microsoft.Threading.Tasks.dll" />
     <Content Include="bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
+    <Content Include="bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml" />
     <Content Include="bin\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\Microsoft.Threading.Tasks.Extensions.Phone.xml" />
+    <Content Include="bin\Microsoft.Threading.Tasks.Extensions.Silverlight.xml" />
+    <Content Include="bin\Microsoft.Threading.Tasks.Extensions.xml" />
+    <Content Include="bin\Microsoft.Threading.Tasks.xml" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\NTAssign.dll" />
+    <Content Include="bin\NTAssign.dll.CodeAnalysisLog.xml" />
     <Content Include="bin\NTAssign.dll.config" />
     <Content Include="bin\NTAssign.pdb" />
     <Content Include="bin\RazorGenerator.Mvc.dll" />
@@ -273,8 +283,11 @@
     <Content Include="bin\System.Diagnostics.DiagnosticSource.dll" />
     <Content Include="bin\System.Diagnostics.DiagnosticSource.xml" />
     <Content Include="bin\System.IO.dll" />
+    <Content Include="bin\System.IO.xml" />
     <Content Include="bin\System.Runtime.dll" />
+    <Content Include="bin\System.Runtime.xml" />
     <Content Include="bin\System.Threading.Tasks.dll" />
+    <Content Include="bin\System.Threading.Tasks.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
     <Content Include="bin\System.Web.Helpers.resources.dll" />
     <Content Include="bin\System.Web.Helpers.xml" />
@@ -441,6 +454,7 @@
     <Content Include="Scripts\i18n\defaults-zh_CN.min.js" />
     <Content Include="Scripts\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\i18n\defaults-zh_TW.min.js" />
+    <Content Include="bin\NTAssign.dll.lastcodeanalysissucceeded" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />

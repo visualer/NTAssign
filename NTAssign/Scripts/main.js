@@ -65,13 +65,28 @@
 
 //line 826 title
 //line ~735 selected
+function clearTitle() {
+    $(".bootstrap-select").find("button").removeAttr("title");
+}
+function regClear() {
+    $("select").on("loaded.bs.select", clearTitle);
+}
+
+function page1Load() {
+    regClear();
+    $("#selectEnv").on('changed.bs.select', clearTitle);
+}
+
 function page2Load(env) {
     //document.formInput.reset();
     var thres, $slp = $(".slp"), $another = $("#slP2");
     $slp.find("option").removeAttr("selected");
     $slp.selectpicker("refresh");
+    regClear();
+
     $("#slP1").on('changed.bs.select', function (e, index) {
         var i = index - 1;
+        clearTitle();
         $another.find("option").each(function () {
             var $opt = $(this), value = parseInt($opt.val());
             if (i % 2 === 0 && value === i + 1 || i % 2 === 1 && value === i - 1)

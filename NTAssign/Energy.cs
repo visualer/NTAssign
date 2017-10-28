@@ -330,7 +330,7 @@ namespace NTAssign
                 catch (ArgumentOutOfRangeException e)
                 {
                     if (e.ParamName == "dt")
-                        break; // rbm increases, dt decreases
+                        break; // rbm increases, dt decreases. no need to continue
                     else throw;
                 }
             }

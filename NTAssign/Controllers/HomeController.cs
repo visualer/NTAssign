@@ -63,13 +63,15 @@ namespace NTAssign.Controllers
         {
             if (ModelState.IsValid)
             {
-                i.GetPlotModel(out Models.PlotModel pm);
-                return View(pm);
+                i.GetPlotModel(out Models.PlotModel[] pm);
+                if (pm.Length == 1)
+                    return View(pm[0]);
+                else
+                    throw new NotImplementedException();
+                    // return View("Step3_Dual", pm);
             }
             ModelState.AddModelError("Invalid Input", new Exception());
             return RedirectToAction("Step1");
         }
-
-
     }
 }

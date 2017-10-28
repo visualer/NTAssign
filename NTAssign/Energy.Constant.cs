@@ -12,7 +12,7 @@ namespace NTAssign
         impossible = 2,
         error = 3,
         completelynomatch = 4
-    };
+    }
 
     public static partial class Energy
     {
@@ -157,6 +157,5 @@ namespace NTAssign
             x = -1;
             return false;
         }
-
     }
 }

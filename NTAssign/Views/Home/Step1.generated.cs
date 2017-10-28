@@ -48,23 +48,30 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
-
-DefineSection("styles", () => {
-
-WriteLiteral("\r\n    <style>\r\n    </style>\r\n");
-
-});
-
-WriteLiteral("<h3");
+WriteLiteral("\r\n\r\n<h3");
 
 WriteLiteral(" class=\"text-center\"");
 
-WriteLiteral(">\r\n    (n,m) Assignment Program for SWNTs Under Complex Environments\r\n</h3>\r\n<h1>" +
-"Step 1</h1>\r\n\r\n<hr />\r\n");
+WriteLiteral(">\r\n    (n,m) Assignment Program for SWNTs Under Complex Environments\r\n</h3>\r\n<h4");
+
+WriteLiteral(" class=\"text-center\"");
+
+WriteLiteral(">\r\n    According to: <a");
+
+WriteLiteral(" href=\"http://pubs.acs.org/doi/10.1021/acsnano.7b05860\"");
+
+WriteLiteral("><b>DOI:</b> 10.1021/acsnano.7b05860</a>\r\n</h4>\r\n<h4");
+
+WriteLiteral(" class=\"text-center\"");
+
+WriteLiteral(">\r\n    <a");
+
+WriteLiteral(" href=\"video.mp4\"");
+
+WriteLiteral(">Guiding Video</a>\r\n</h4>\r\n<h1>Step 1</h1>\r\n\r\n<hr />\r\n");
 
             
-            #line 17 "..\..\Views\Home\Step1.cshtml"
+            #line 19 "..\..\Views\Home\Step1.cshtml"
  using (Html.BeginForm("Step2", "Home"))
 {
     
@@ -72,14 +79,14 @@ WriteLiteral(">\r\n    (n,m) Assignment Program for SWNTs Under Complex Environm
             #line default
             #line hidden
             
-            #line 19 "..\..\Views\Home\Step1.cshtml"
+            #line 21 "..\..\Views\Home\Step1.cshtml"
 Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 19 "..\..\Views\Home\Step1.cshtml"
+            #line 21 "..\..\Views\Home\Step1.cshtml"
                             
 
             
@@ -108,7 +115,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 24 "..\..\Views\Home\Step1.cshtml"
+            #line 26 "..\..\Views\Home\Step1.cshtml"
            Write(Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "selectEnv", @class = "form-control selectpicker" }));
 
             
@@ -131,16 +138,16 @@ WriteLiteral(" />\r\n            </div>\r\n            <div");
 WriteLiteral(" class=\"col-lg-offset-0_5 col-lg-4 col-md-offset-0 col-md-3 col-sm-offset-0_5 mar" +
 "gin-xs-top col-xs-12 col-xs-offset-0_5\"");
 
-WriteLiteral(" style=\"height: 100px; overflow-y: scroll;\"");
+WriteLiteral(" style=\"height: 200px; overflow-y: auto;\"");
 
 WriteLiteral(@">
                 <h4>Update Log</h4>
                 <p>
-                    <b>1.0.1_beta &mdash; 2017/9/30</b><br />
-                    - Small adjustment. Fixed: diameter minimum when \(p\lt6\) 
+                    <b>v1.0.1-beta &mdash; 2017/9/30</b><br />
+                    - Minor adjustment. Fixed: energy function for air-suspended related type isn't monotonic.
                 </p>
                 <p>
-                    <b>1.0.0_beta &mdash; 2017/9/25</b><br />
+                    <b>v1.0.0-beta &mdash; 2017/9/25</b><br />
                     - First release.
                 </p>
             </div>
@@ -149,12 +156,20 @@ WriteLiteral(@">
 ");
 
             
-            #line 42 "..\..\Views\Home\Step1.cshtml"
+            #line 44 "..\..\Views\Home\Step1.cshtml"
 }
 
             
             #line default
             #line hidden
+WriteLiteral("\r\n");
+
+DefineSection("scripts", () => {
+
+WriteLiteral("\r\n    <script>\r\n        page1Load();\r\n    </script>\r\n");
+
+});
+
         }
     }
 }

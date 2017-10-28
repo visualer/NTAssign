@@ -3,14 +3,16 @@
 @{
     ViewBag.Title = "CNT Assign";
 }
-@section styles
-{
-    <style>
-    </style>
-}
+
 <h3 class="text-center">
     (n,m) Assignment Program for SWNTs Under Complex Environments
 </h3>
+<h4 class="text-center">
+    According to: <a href="http://pubs.acs.org/doi/10.1021/acsnano.7b05860"><b>DOI:</b> 10.1021/acsnano.7b05860</a>
+</h4>
+<h4 class="text-center">
+    <a href="video.mp4">Guiding Video</a>
+</h4>
 <h1>Step 1</h1>
 
 <hr />
@@ -26,17 +28,24 @@
             <div class="col-lg-1 col-md-1_5 col-sm-2 col-xs-2 col-xs-offset-0_5">
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
-            <div class="col-lg-offset-0_5 col-lg-4 col-md-offset-0 col-md-3 col-sm-offset-0_5 margin-xs-top col-xs-12 col-xs-offset-0_5" style="height: 100px; overflow-y: scroll;">
+            <div class="col-lg-offset-0_5 col-lg-4 col-md-offset-0 col-md-3 col-sm-offset-0_5 margin-xs-top col-xs-12 col-xs-offset-0_5" style="height: 200px; overflow-y: auto;">
                 <h4>Update Log</h4>
                 <p>
-                    <b>1.0.1_beta &mdash; 2017/9/30</b><br />
-                    - Small adjustment. Fixed: diameter minimum when \(p\lt6\) 
+                    <b>v1.0.1-beta &mdash; 2017/9/30</b><br />
+                    - Minor adjustment. Fixed: energy function for air-suspended related type isn't monotonic.
                 </p>
                 <p>
-                    <b>1.0.0_beta &mdash; 2017/9/25</b><br />
+                    <b>v1.0.0-beta &mdash; 2017/9/25</b><br />
                     - First release.
                 </p>
             </div>
         </div>
     </div>
+}
+
+@section scripts
+{
+    <script>
+        page1Load();
+    </script>
 }
