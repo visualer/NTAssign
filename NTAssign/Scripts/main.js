@@ -236,19 +236,21 @@ function drawPlot(placeholder, params) {
         pointColor = "rgb(255, 0, 0)";
     else if (params.pointType === "green")
         pointColor = "rgb(12, 180, 15)";
-    // blue point is diamod, otherwise square
-    series.push({
-        color: pointColor,
-        data: [params.point],
-        points: {
-            show: true,
-            symbol: params.pointType === "green" ? "diamond" : "square",
-            radius: defaultRadius,
-            fill: true,
-            fillColor: params.pointType === "green" ? "rgba(0, 0, 0, 0)" : pointColor
-        },
-        hoverable: false
-    });
+    // blue point is diamond, otherwise square
+    if (params.pointType !== "none") {
+        series.push({
+            color: pointColor,
+            data: [params.point],
+            points: {
+                show: true,
+                symbol: params.pointType === "green" ? "diamond" : "square",
+                radius: defaultRadius,
+                fill: true,
+                fillColor: params.pointType === "green" ? "rgba(0, 0, 0, 0)" : pointColor
+            },
+            hoverable: false
+        });
+    }
     if (params.bluePoint !== null)
         series.push({
             color: "rgb(0, 0, 255)",

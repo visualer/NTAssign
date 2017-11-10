@@ -37,52 +37,63 @@ namespace NTAssign.Models
         // sqrt log exceptions
         public PlotModel E1R1()
         {
-            int p1 = (Val1 is null) ? P2 : P1, type = Env, p = pArr_p1[p1];
+            int p1 = (Val1 is null) ? P2 : P1, type = Env, p = p1ToP[p1];
             double val1 = (Val1 ?? Val2) ?? -1, wRBM = RBM ?? -1;
             if (val1 < 0 || wRBM < 0)
                 throw new ArgumentException("missing parameter");
             double dt = RBMtoDt(wRBM, p, type);
             double[] cos = GetCos3Theta(val1, dt, p, type);
             string resultString = "";
+            PlotModel ProcErr() => Assign(new PlotModel()
+            {
+                bluePoint = null,
+                point = new double[] { val1, 0.23 },
+                p_lesser = pToLesser[p],
+                type = type,
+                pointType = "none",
+                p1_lesser = P1ToLesser(p1),
+                resultString = resultString
+            });
+
             if (cos.All(elem => elem == -1))
             {
                 resultString += "Invalid input: out of range.";
-                return new PlotModel() { ar = AssignResult.error, resultString = resultString };
+                return ProcErr();
             }
-            int p2, mod2; //mod1
+            int p_2, mod2; //mod1
             if (IsMetal(p))
             {
                 if (p1 % 4 - 3 != (cos[0] == -1 ? 0 : -1))
                 {
                     resultString += @"Invalid input: out of range. You may have mistakenly put " + p1Arr[p1] + " instead of " +
                          p1Arr[p1 + 5 - (p1 % 4) * 2] + ".";
-                    return new PlotModel() { ar = AssignResult.error, resultString = resultString };
+                    return ProcErr();
                 }
-                p2 = p;
+                p_2 = p;
                 mod2 = cos[0] == -1 ? -1 : 0;
             }
             else
             {
-                p2 = IsMetal(p + 1) ? p - 1 : p + 1;
+                p_2 = IsMetal(p + 1) ? p - 1 : p + 1;
                 mod2 = cos[0] == -1 ? 2 : 1; // == mod1
             }
             double val2;
             try
             {
-                val2 = GetEnergy_Cos3Theta(dt, cos[0] == -1 ? cos[1] : cos[0], p2, type, mod2);
+                val2 = GetEnergy_Cos3Theta(dt, cos[0] == -1 ? cos[1] : cos[0], p_2, type, mod2);
             }
             catch (ArgumentOutOfRangeException e)
             {
                 if (e.ParamName == "dt")
                 {
-                    resultString += "Invalid input: out of range.";
-                    return new PlotModel() { ar = AssignResult.error, resultString = resultString };
+                    resultString += "Invalid input: out of range, diameter too small.";
+                    return ProcErr();
                 }
                 else throw;
             }
-            if ((IsMetal(p) && (mod2 == -1)) || (!IsMetal(p) && (p > p2)))
+            if ((IsMetal(p) && (mod2 == -1)) || (!IsMetal(p) && (p > p_2)))
             {
-                Swap(ref p, ref p2);
+                Swap(ref p, ref p_2);
                 Swap(ref val1, ref val2);
             }
             double x = (val1 + val2) / 2, y = val2 - val1;
@@ -93,7 +104,7 @@ namespace NTAssign.Models
                 p_lesser = p,
                 type = type,
                 pointType = "green",
-                p1_lesser = p1 % 2 == 0 ? p1 : p1 - 1,
+                p1_lesser = P1ToLesser(p1),
                 resultString = resultString
             }, mod2);
 
@@ -103,7 +114,7 @@ namespace NTAssign.Models
         public PlotModel[] E2()
         {
             string resultString = "";
-            int p1 = pArr_p1[P1], p2 = pArr_p1[P2];
+            int p1 = p1ToP[P1], p2 = p1ToP[P2];
             int p1_ = P1, p2_ = P2, type = Env;
             double val1 = Val1 ?? -1, val2 = Val2 ?? -1;
             if (p1_ > p2_)
@@ -147,92 +158,6 @@ namespace NTAssign.Models
                 PlotModel pm1 = as1.E1R1();
                 PlotModel pm2 = as2.E1R1();*/
             }
-            #region comment
-            /*else
-            {
-                if (type <= 2)
-                {
-                    val1 += (type == 1) ? 0.04 : ((type == 2) ? 0.1 : 0);
-                    val2 += (type == 1) ? 0.04 : ((type == 2) ? 0.1 : 0);
-                    if (IsMetal(p1))
-                    {
-                        int mod1 = p1_ % 4 - 3, mod2 = p2_ % 4 - 3;
-                        double gamma1 = param[p1, 2] * (mod1 * 2 + 1);
-                        double gamma2 = param[p2, 2] * (mod2 * 2 + 1);
-                        double mA = val1 / gamma1 - val2 / gamma2;
-                        double mB = -(param[p1, 0] / gamma1 - param[p2, 0] / gamma2);
-                        double mC = param[p1, 1] / gamma1 - param[p2, 1] / gamma2;
-                        double cos3Theta = -1, dt = -1;
-                        // solve the quadratic eqn.
-                        try
-                        {
-                            dt = (-mB + Math.Sqrt(mB * mB - 4 * mA * mC)) / (2 * mA);
-                            cos3Theta = GetCos3Theta(val1, dt, p1, type)[mod1 + 1];
-                        }
-                        catch (Exception)
-                        {
-                            // nothing
-                        }
-                        if (cos3Theta == -1)
-                        {
-                            resultString += @"Yout may have mistaken the \(M_{ii}^+\) and \(M_{ii}^-\), for the " +
-                                @"\(\cos(3\theta)\) solved from the input value is invalid.";
-                            return AssignResult.error;
-                        }
-                        // NOW we have the valid data of cos3theta and dt.
-                        double val1_pair = GetEnergy_Cos3Theta(dt, cos3Theta, p1, type, -mod1 - 1);
-                        double val2_pair = GetEnergy_Cos3Theta(dt, cos3Theta, p2, type, -mod2 - 1);
-                        AssignResult ar1 = Assign(new double[] { (val1 + val1_pair) / 2, (val2 - val1) * (mod1 == 0 ? -1 : 1) }, p1, type, out List<double[]> result1, out List<double[]> all1);
-                        AssignResult ar2 = Assign(new double[] { (val1 + val2_pair) / 2, (val2 - val1) * (mod1 == 0 ? -1 : 1) }, p2, type, out List<double[]> result2, out List<double[]> all2);
-                    }
-                    else
-                    {
-                        void calc(out double dt_, out double cos3Theta_, int mod_)
-                        {
-                            double gamma1 = param[p1, 2] * (mod_ * 2 - 3);
-                            double gamma2 = param[p2, 2] * (mod_ * 2 - 3);
-                            double mA = val1 / gamma1 - val2 / gamma2;
-                            double mB = -(param[p1, 0] / gamma1 - param[p2, 0] / gamma2);
-                            double mC = param[p1, 1] / gamma1 - param[p2, 1] / gamma2;
-                            cos3Theta_ = -1;
-                            dt_ = -1;
-                            // solve the quadratic eqn.
-                            try
-                            {
-                                dt_ = (-mB + Math.Sqrt(mB * mB - 4 * mA * mC)) / (2 * mA);
-                                cos3Theta_ = GetCos3Theta(val1, dt_, p1, type)[mod_ + 1];
-                            }
-                            catch (Exception)
-                            {
-                                // nothing
-                            }
-                        }
-                        int mod = 1;
-                        calc(out double dt, out double cos3Theta, mod);
-                        if (cos3Theta == -1)
-                        {
-                            resultString += @"Yout may have mistaken the \(M_{ii}^+\) and \(M_{ii}^-\), for the " +
-                                @"\(\cos(3\theta)\) solved from the input value is invalid.";
-                            return AssignResult.error;
-                        }
-                        // NOW we have the valid data of cos3theta and dt.
-                        double val1_pair = GetEnergy_Cos3Theta(dt, cos3Theta, p1, type, -mod1 - 1);
-                        double val2_pair = GetEnergy_Cos3Theta(dt, cos3Theta, p2, type, -mod2 - 1);
-                        AssignResult ar1 = Assign(new double[] { (val1 + val1_pair) / 2, (val2 - val1) * (mod1 == 0 ? -1 : 1) }, p1, type, out List<double[]> result1, out List<double[]> all1);
-                        AssignResult ar2 = Assign(new double[] { (val1 + val2_pair) / 2, (val2 - val1) * (mod1 == 0 ? -1 : 1) }, p2, type, out List<double[]> result2, out List<double[]> all2);
-                    }
-                }
-                else if (type == 3)
-                {
-                    double a = 1.074, b = 0.467, c = 0.812;
-                    double calc(int extmod) =>
-                        (val - a * (p + 1) / dt * (1 + b * Math.Log10(c / ((p + 1) * dt))) -
-                        ((p > 2) ? 0.059 * (p + 1) / dt : 0)) / betap[p, extmod] * (dt * dt); //extra for larger than M11; warning: p + 1
-                    r[0] = calc(0); //Mii- or MOD1
-                    r[1] = calc(1);
-                }
-            }*/
-            #endregion
 
         }
 
@@ -245,7 +170,12 @@ namespace NTAssign.Models
                     .Where(e => (e[2] >= pm.point[0] - deltaX && e[2] <= pm.point[0] + deltaX && e[3] <= maxY && e[3] >= minY))
                     .ToList();
 
-
+            if (pm.pointType == "none")
+            {
+                pm.ar = AssignResult.error;
+                pm.result = new List<double[]>();
+                return pm;
+            }
             double? dxmin_p = null, dxmax_p = null, dymin_p = null, dymax_p = null;
             if (pm.pointType == "red")
             {
@@ -321,7 +251,7 @@ namespace NTAssign.Models
             // use the green 
             if (pm.result.Count == 0)
             {
-                pm.ar = AssignResult.completelynomatch;
+                pm.ar = AssignResult.error;
                 pm.resultString = "Invalid input: out of range. Please check your input.";
                 return pm;
             }

@@ -10,8 +10,7 @@ namespace NTAssign
         accurate = 0,
         possible = 1,
         impossible = 2,
-        error = 3,
-        completelynomatch = 4
+        error = 3
     }
 
     public static partial class Energy
@@ -59,7 +58,9 @@ namespace NTAssign
         public static string[] p1Arr_raw = {
             "S_{11}", "S_{22}", "M_{11}^-", "M_{11}^+", "S_{33}", "S_{44}", "M_{22}^-", "M_{22}^+", "S_{55}", "S_{66}", "M_{33}^-", "M_{33}^+"
         };
-        public static int[] pArr_p1 = { 0, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
+        public static int[] p1ToP = { 0, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
+        public static int[] pToLesser = { 0, 0, 2, 3, 3, 5, 6, 6, 9 };
+        public static int P1ToLesser(int p1) => p1 % 2 == 0 ? p1 : p1 - 1;
         public static double Dt(int n, int m, int type) => ((type != 4) ? 0.142 : 0.144) * Math.Sqrt(3 * (n * n + n * m + m * m)) / Math.PI;
         public static double Theta(int n, int m) => Math.Atan(Math.Sqrt(3) * m / (2 * n + m));
         public static int Mod(int n, int m) => (2 * n + m) % 3;
