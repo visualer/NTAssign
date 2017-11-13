@@ -179,7 +179,7 @@ namespace NTAssign.Models
             double? dxmin_p = null, dxmax_p = null, dymin_p = null, dymax_p = null;
             if (pm.pointType == "red")
             {
-                double? dxmin = null, dxmax = null;
+                double dxmin, dxmax;
                 if (pm.bluePoint != null)
                 {
                     if (pm.bluePoint[0] - pm.point[0] < 0.02)
@@ -193,10 +193,15 @@ namespace NTAssign.Models
                         dxmax = -0.005; // TODO: NOTICE HERE
                     }
                 }
+                else
+                {
+                    dxmin = -0.025;
+                    dxmax = 0.008;
+                }
                 pm.result = pm.all
                     .Where(e => (
                     (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) && 
-                    pm.point[0] - e[2] >= (dxmin ?? -0.025) && pm.point[0] - e[2] <= (dxmax ?? 0.008) && 
+                    pm.point[0] - e[2] >= dxmin && pm.point[0] - e[2] <= dxmax && 
                     pm.point[1] - e[3] <= 0.015 && pm.point[1] - e[3] >= -0.015
                     ))
                     .ToList();
@@ -212,7 +217,7 @@ namespace NTAssign.Models
                     return pm;
                 }
             }
-            else if (pm.pointType == "green")
+            else
             {
                 dymin_p = -0.070;
                 dymax_p = 0.070;
