@@ -28,41 +28,6 @@
     }
 }
 
-/*function page2Load(env) {
-    var thres, $slp = $(".slp");
-    $slp.find("option").removeAttr("selected");
-    $slp.selectpicker("refresh");
-    $slp.each(function () {
-        $(this).change(function () {
-            var $another, li, $t = $(this);
-            if (this.id === "slP1")
-                $another = $("#slP2");
-            else
-                $another = $("#slP1");
-            var i = parseInt($t.val());
-            $another.find("option").each(function () {
-                var $opt = $(this), val = parseInt($opt.val());
-                if (i % 4 < 2) {
-                    if (val % 4 === 2 || val % 4 === 3)
-                        $opt.attr("disabled", "disabled");
-                    else $opt.removeAttr("disabled");
-                }
-                else {
-                    if (val % 4 === 0 || val % 4 === 1)
-                        $opt.attr("disabled", "disabled");
-                    else $opt.removeAttr("disabled");
-                }
-                if (val === i)
-                    $opt.attr("disabled", "disabled");
-            });
-            $t.find("option").each(function () {
-                $(this).removeAttr("disabled");
-            });
-            $slp.selectpicker("refresh");
-        });
-    });
-}*/
-
 //line 826 title
 //line ~735 selected
 function clearTitle() {
@@ -141,7 +106,7 @@ function drawPlot(placeholder, params) {
         }
     };
     
-    var series = [], pointColor;
+    var series = [];
     for (var i = 0; i < params.rbm.length; i++)
         series.push({
             color: "rgb(208, 208, 208)", // use the shadow
@@ -232,21 +197,18 @@ function drawPlot(placeholder, params) {
         });
     }
 
-    if (params.pointType === "red")
-        pointColor = "rgb(255, 0, 0)";
-    else if (params.pointType === "green")
-        pointColor = "rgb(12, 180, 15)";
+    
     // blue point is diamond, otherwise square
     if (params.pointType !== "none") {
         series.push({
-            color: pointColor,
+            color: params.pointType === "green" ? "rgb(12, 180, 15)" : "rgb(255, 0, 0)",
             data: [params.point],
             points: {
                 show: true,
                 symbol: params.pointType === "green" ? "diamond" : "square",
                 radius: defaultRadius,
                 fill: true,
-                fillColor: params.pointType === "green" ? "rgba(0, 0, 0, 0)" : pointColor
+                fillColor: params.pointType === "green" ? "rgba(0, 0, 0, 0)" : "rgb(255, 0, 0)"
             },
             hoverable: false
         });
