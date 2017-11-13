@@ -166,9 +166,34 @@ namespace NTAssign.Models
             // x: average y: splitting
             double Dist(double x1, double y1, double x2, double y2) => Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
             double deltaX = 0.6, maxY = IsMetal(pm.p_lesser) ? 0.6 : pm.point[1] + 0.6, minY = IsMetal(pm.p_lesser) ? -0.1 : pm.point[1] - 0.6;
+
             pm.all = GetList(pm.p_lesser, pm.type)
-                    .Where(e => (e[2] >= pm.point[0] - deltaX && e[2] <= pm.point[0] + deltaX && e[3] <= maxY && e[3] >= minY))
+                    .Where(e => (
+                    e[2] >= pm.point[0] - deltaX &&
+                    e[2] <= pm.point[0] + deltaX && 
+                    e[3] <= maxY && 
+                    e[3] >= minY)
+                    )
                     .ToList();
+
+            double dxmin_p = -1, dxmax_p = -1, dymin_p = -1, dymax_p = -1;
+            
+            var query = pm.all
+                .Where(e => (
+                (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) &&
+                pm.point[0] - e[2] >= dxmin_p && pm.point[0] - e[2] <= dxmax_p &&
+                pm.point[1] - e[3] <= dymax_p && pm.point[1] - e[3] >= dymin_p
+                ));
+
+            void ProcessOutput()
+            {
+                pm.result = query.OrderBy(e => Dist(e[2], e[3], pm.point[0], pm.point[1])).ToList();
+                for (int i = 0; i < pm.result.Count; i++)
+                    pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" +
+                        (i != pm.result.Count - 1 ? ", " : "");
+                pm.resultString += "</font>";
+            }
+            
 
             if (pm.pointType == "none")
             {
@@ -176,46 +201,44 @@ namespace NTAssign.Models
                 pm.result = new List<double[]>();
                 return pm;
             }
-            double? dxmin_p = null, dxmax_p = null, dymin_p = null, dymax_p = null;
+
             if (pm.pointType == "red")
             {
-                double dxmin, dxmax;
+                // query for accurate 
                 if (pm.bluePoint != null)
                 {
                     if (pm.bluePoint[0] - pm.point[0] < 0.02)
                     {
-                        dxmin = -0.008;
-                        dxmax = 0.008;
+                        dxmin_p = -0.008;
+                        dxmax_p = 0.008;
                     }
                     else
                     {
-                        dxmin = -0.030;
-                        dxmax = -0.005; // TODO: NOTICE HERE
+                        dxmin_p = -0.030;
+                        dxmax_p = -0.005; // TODO: NOTICE HERE
                     }
                 }
                 else
                 {
-                    dxmin = -0.025;
-                    dxmax = 0.008;
+                    dxmin_p = -0.025;
+                    dxmax_p = 0.008;
                 }
-                pm.result = pm.all
-                    .Where(e => (
-                    (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) && 
-                    pm.point[0] - e[2] >= dxmin && pm.point[0] - e[2] <= dxmax && 
-                    pm.point[1] - e[3] <= 0.015 && pm.point[1] - e[3] >= -0.015
-                    ))
-                    .ToList();
-                if (pm.result.Count > 0)
+                dymax_p = 0.015;
+                dymin_p = -0.015;
+                
+                if (query.Count() > 0)
                 {
                     pm.ar = AssignResult.accurate;
                     pm.resultString += "The assignment result is:<br /><font style=\"font-size: 28px;\">";
-                    pm.result = pm.result.OrderBy(e => Dist(e[2], e[3], pm.point[0], pm.point[1])).ToList();
-                    for (int i = 0; i < pm.result.Count; i++)
-                        pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" + 
-                            (i == pm.result.Count ? ", " : "");
-                    pm.resultString += "</font>";
+                    ProcessOutput();
                     return pm;
                 }
+                
+                dxmin_p = -0.040;
+                dxmax_p = 0.0126;
+                dymax_p = 0.030;
+                dymin_p = -0.030;
+                
             }
             else
             {
@@ -224,49 +247,34 @@ namespace NTAssign.Models
                 dxmax_p = 0.040;
                 dxmin_p = -0.040;
             }
-            pm.result = pm.all
-                .Where(e => (
-                (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) && 
-                pm.point[0] - e[2] >= (dxmin_p ?? -0.040) && pm.point[0] - e[2] <= (dxmax_p ?? 0.0126) && 
-                pm.point[1] - e[3] <= (dymax_p ?? 0.030) && pm.point[1] - e[3] >= (dymin_p ?? -0.030)
-                ))
-                .ToList();
-            if (pm.result.Count > 0)
+            
+            // deferred execution
+            
+            // query for likely
+            if (query.Count() > 0)
             {
                 pm.ar = AssignResult.possible;
                 pm.resultString += "The likely assignments include:<br/><font style=\"font-size: 28px;\">";
-                pm.result = pm.result.OrderBy(e => Dist(e[2], e[3], pm.point[0], pm.point[1])).ToList();
-                for (int i = 0; i < pm.result.Count; i++)
-                    pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" +
-                        (i != pm.result.Count - 1 ? ", " : "");
-                pm.resultString += "</font>";
+                ProcessOutput();
                 return pm;
             }
+
+            // use the green criteria and query again for no match.
+            // and it's easy to see that green point, if not returned in the previous step,
+            // will not give results in this step.
             dymin_p = -0.070;
             dymax_p = 0.070;
             dxmax_p = 0.040;
-            dxmin_p = -0.040;
-            pm.result = pm.all
-                .Where(e => (
-                (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) &&
-                pm.point[0] - e[2] >= (dxmin_p ?? -0.040) && pm.point[0] - e[2] <= (dxmax_p ?? 0.010) &&
-                pm.point[1] - e[3] <= (dymax_p ?? 0.020) && pm.point[1] - e[3] >= (dymin_p ?? -0.020)
-                ))
-                .ToList();
-            // use the green 
-            if (pm.result.Count == 0)
+            dxmin_p = -0.040;  
+            if (query.Count() == 0)
             {
                 pm.ar = AssignResult.error;
                 pm.resultString = "Invalid input: out of range. Please check your input.";
                 return pm;
             }
-            pm.resultString += "No match. The possible results include:<br /><font style=\"font-size: 28px;\">";
-            pm.result = pm.result.OrderBy(e => Dist(e[2], e[3], pm.point[0], pm.point[1])).ToList();
-            for (int i = 0; i < pm.result.Count; i++)
-                pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" +
-                    (i != pm.result.Count - 1 ? ", " : "");
-            pm.resultString += "</font>";
             pm.ar = AssignResult.impossible;
+            pm.resultString += "No match. The possible results include:<br /><font style=\"font-size: 28px;\">";
+            ProcessOutput();
             return pm;
         }
 
