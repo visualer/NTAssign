@@ -194,6 +194,7 @@ namespace NTAssign.Models
                         (i != pm.result.Count - 1 ? ", " : "");
                 pm.resultString += "</font>";
             }
+
             if (pm.pointType == "none")
             {
                 pm.ar = AssignResult.error;
@@ -265,6 +266,7 @@ namespace NTAssign.Models
             {
                 pm.ar = AssignResult.error;
                 pm.resultString = "Invalid input: out of range. Please check your input.";
+                pm.result = new List<double[]>();
                 return pm;
             }
             pm.ar = AssignResult.impossible;
