@@ -184,6 +184,7 @@ namespace NTAssign.Models
                 pm.point[0] - e[2] >= dxmin_p && pm.point[0] - e[2] <= dxmax_p &&
                 pm.point[1] - e[3] <= dymax_p && pm.point[1] - e[3] >= dymin_p
                 ));
+            // deferred execution
 
             void ProcessOutput()
             {
@@ -193,15 +194,12 @@ namespace NTAssign.Models
                         (i != pm.result.Count - 1 ? ", " : "");
                 pm.resultString += "</font>";
             }
-            
-
             if (pm.pointType == "none")
             {
                 pm.ar = AssignResult.error;
                 pm.result = new List<double[]>();
                 return pm;
             }
-
             if (pm.pointType == "red")
             {
                 // query for accurate 
@@ -225,7 +223,7 @@ namespace NTAssign.Models
                 }
                 dymax_p = 0.015;
                 dymin_p = -0.015;
-                
+
                 if (query.Count() > 0)
                 {
                     pm.ar = AssignResult.accurate;
@@ -247,18 +245,15 @@ namespace NTAssign.Models
                 dxmax_p = 0.040;
                 dxmin_p = -0.040;
             }
-            
-            // deferred execution
-            
+           
             // query for likely
             if (query.Count() > 0)
             {
                 pm.ar = AssignResult.possible;
-                pm.resultString += "The likely assignments include:<br/><font style=\"font-size: 28px;\">";
+                pm.resultString += "The likely assignments include:<br /><font style=\"font-size: 28px;\">";
                 ProcessOutput();
                 return pm;
             }
-
             // use the green criteria and query again for no match.
             // and it's easy to see that green point, if not returned in the previous step,
             // will not give results in this step.
@@ -438,7 +433,7 @@ namespace NTAssign.Models
             }
             string refstr = "";
             for (int i = 0; i < reflist.Count; i++)
-                refstr += "<a target='_blank' href='http://doi.org/" + doi[reflist[i]] + "'>[" + (i + 1) + "] " + references[reflist[i]] + (i != reflist.Count - 1 ? "<br /><a/>" : "");
+                refstr += "<a target='_blank' href='http://doi.org/" + doi[reflist[i]] + "'>[" + (i + 1) + "] " + references[reflist[i]] + (i != reflist.Count - 1 ? "<br /></a>" : "");
             return new Tuple<List<string[]>, List<int[]>, string>(arr, colspan, refstr);
         }
 
