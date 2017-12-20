@@ -66,7 +66,7 @@ WriteLiteral(" class=\"text-center\"");
 
 WriteLiteral(">\r\n    <a");
 
-WriteLiteral(" href=\"video.mp4\"");
+WriteLiteral(" href=\"http://www.chem.pku.edu.cn/cnt_assign/video.mp4\"");
 
 WriteLiteral(">Guiding Video</a>\r\n</h4>\r\n<h1>Step 1</h1>\r\n\r\n<hr />\r\n");
 
@@ -143,6 +143,10 @@ WriteLiteral(" style=\"height: 200px; overflow-y: auto;\"");
 WriteLiteral(@">
                 <h4>Update Log</h4>
                 <p>
+                    <b>v1.0.1-beta &mdash; 2017/12/20</b><br />
+                    - Guiding Video updated.
+                </p>
+                <p>
                     <b>v1.0.1-beta &mdash; 2017/10/29</b><br />
                     - Minor adjustment.
                 </p>
@@ -156,7 +160,7 @@ WriteLiteral(@">
 ");
 
             
-            #line 44 "..\..\Views\Home\Step1.cshtml"
+            #line 48 "..\..\Views\Home\Step1.cshtml"
 }
 
             
