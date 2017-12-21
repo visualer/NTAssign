@@ -64,14 +64,22 @@ WriteLiteral("><i>ACS Nano</i>, <b>2017</b>, <i>11</i> (10), pp 10509–10518</a
 
 WriteLiteral(" class=\"text-center\"");
 
-WriteLiteral(">\r\n    <a");
+WriteLiteral(">\r\n    Guiding Video:\r\n    <a");
 
-WriteLiteral(" href=\"http://www.chem.pku.edu.cn/cnt_assign/video.mp4\"");
+WriteLiteral(" href=\"http://www.chem.pku.edu.cn/cnt_assign/tutorial.mp4\"");
 
-WriteLiteral(">Guiding Video</a>\r\n</h4>\r\n<h1>Step 1</h1>\r\n\r\n<hr />\r\n");
+WriteLiteral(" style=\"text-decoration:underline\"");
+
+WriteLiteral(">Website Tutorial</a>\r\n    &nbsp;&nbsp;\r\n    <a");
+
+WriteLiteral(" href=\"http://www.chem.pku.edu.cn/cnt_assign/bilayerplot.mp4\"");
+
+WriteLiteral(" style=\"text-decoration:underline\"");
+
+WriteLiteral(">Bilayer Plot</a>\r\n</h4>\r\n<h1>Step 1</h1>\r\n\r\n<hr />\r\n");
 
             
-            #line 19 "..\..\Views\Home\Step1.cshtml"
+            #line 22 "..\..\Views\Home\Step1.cshtml"
  using (Html.BeginForm("Step2", "Home"))
 {
     
@@ -79,14 +87,14 @@ WriteLiteral(">Guiding Video</a>\r\n</h4>\r\n<h1>Step 1</h1>\r\n\r\n<hr />\r\n")
             #line default
             #line hidden
             
-            #line 21 "..\..\Views\Home\Step1.cshtml"
+            #line 24 "..\..\Views\Home\Step1.cshtml"
 Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 21 "..\..\Views\Home\Step1.cshtml"
+            #line 24 "..\..\Views\Home\Step1.cshtml"
                             
 
             
@@ -115,7 +123,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 26 "..\..\Views\Home\Step1.cshtml"
+            #line 29 "..\..\Views\Home\Step1.cshtml"
            Write(Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "selectEnv", @class = "form-control selectpicker" }));
 
             
@@ -160,7 +168,7 @@ WriteLiteral(@">
 ");
 
             
-            #line 48 "..\..\Views\Home\Step1.cshtml"
+            #line 51 "..\..\Views\Home\Step1.cshtml"
 }
 
             
