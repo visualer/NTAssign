@@ -200,6 +200,28 @@ Write(Scripts.Render("~/bundles/jquery"));
             
             #line default
             #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 32 "..\..\Views\Shared\_Layout.cshtml"
+Write(Scripts.Render("~/bundles/jqueryval"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 33 "..\..\Views\Shared\_Layout.cshtml"
+Write(Scripts.Render("~/bundles/jqueryajax"));
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\r\n    <script");
 
 WriteLiteral(" src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-" +
@@ -231,7 +253,7 @@ WriteLiteral(@">
 WriteLiteral("    ");
 
             
-            #line 50 "..\..\Views\Shared\_Layout.cshtml"
+            #line 52 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -242,7 +264,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 51 "..\..\Views\Shared\_Layout.cshtml"
+            #line 53 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/flot"));
 
             
@@ -250,9 +272,9 @@ Write(Scripts.Render("~/bundles/flot"));
             #line hidden
 WriteLiteral("\r\n    <script");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 2345), Tuple.Create("\"", 2368)
-, Tuple.Create(Tuple.Create("", 2351), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
-, 2351), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 2434), Tuple.Create("\"", 2457)
+, Tuple.Create(Tuple.Create("", 2440), Tuple.Create<System.Object, System.Int32>(Href("~/Scripts/main.js")
+, 2440), false)
 );
 
 WriteLiteral("></script>\r\n");
@@ -260,7 +282,7 @@ WriteLiteral("></script>\r\n");
 WriteLiteral("    ");
 
             
-            #line 53 "..\..\Views\Shared\_Layout.cshtml"
+            #line 55 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

@@ -73,5 +73,11 @@ namespace NTAssign.Controllers
             ModelState.AddModelError("Invalid Input", new Exception());
             return RedirectToAction("Step1");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken()]
+        public PartialViewResult Calculator(Models.AssignModel l)
+        {
+            return PartialView("_Calculator", l);
+        }
     }
 }

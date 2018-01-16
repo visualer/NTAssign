@@ -11,63 +11,100 @@
 <h1 class="math">Step 2 <small>@Energy.envArr[Model.Env]</small></h1>
 <hr />
 <div class="row">
-@using (Html.BeginForm("Step3", "Home", FormMethod.Post, new { name = "formInput", onsubmit = "return validate(this)" }))
-{
-    @Html.AntiForgeryToken()
     <div class="form-horizontal math col-md-6">
-        <div class="row">
-            <p id="hint" style="font-size: 16px; padding: 8px; border-radius: 4px;" class="col-lg-9 col-md-11 col-sm-8 col-xs-9 col-lg-offset-1 col-md-offset-0_5 col-sm-offset-1 col-xs-offset-1">
-                Please input at least 2 values.<br />
-                Only paired transition energies are allowed to input in the current version.
-            </p>
+        @using (Html.BeginForm("Step3", "Home", FormMethod.Post, new { name = "formInput", onsubmit = "return validate(this)" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <p id="hint" style="font-size: 16px; padding: 8px; border-radius: 4px;" class="col-lg-9 col-md-11 col-sm-8 col-xs-9 col-lg-offset-1 col-md-offset-0_5 col-sm-offset-1 col-xs-offset-1">
+                    Please input at least 2 values.<br />
+                    Only paired transition energies are allowed to input in the current version.
+                </p>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="slEnv" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">SWNT Type</label>
+                <div class="col-md-6 col-sm-4 col-xs-8 col-xs-offset-0_5">
+                    @Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "slEnv", @class = "form-control selectpicker", disabled = "disabled" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="slP1" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">Transition Energy 1</label>
+                <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
+                    @Html.DropDownListFor(model => model.P1, ViewBag.slType as List<SelectListItem>, new { id = "slP1", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)" })
+                </div>
+                <label for="slP1" class="control-label col-auto">=</label>
+                <div class="col-md-4 col-sm-4 col-xs-5">
+                    @Html.EditorFor(model => model.Val1, new { htmlAttributes = new { id = "edVal1", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
+                </div>
+                <label class="control-label col-auto">\(\mathrm{eV}\)</label>
+            </div>
+            <div class="form-group">
+                <label for="slP2" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">Transition Energy 2</label>
+                <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
+                    @Html.DropDownListFor(model => model.P2, ViewBag.slType as List<SelectListItem>, new { id = "slP2", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)", disabled = "disabled" })
+                </div>
+                <label for="slP1" class="control-label col-auto">=</label>
+                <div class="col-md-4 col-sm-4 col-xs-5">
+                    @Html.EditorFor(model => model.Val2, new { htmlAttributes = new { id = "edVal2", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
+                </div>
+                <label class="control-label col-auto">\(\mathrm{eV}\)</label>
+            </div>
+            <div class="form-group">
+                <label for="slRBM" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">RBM</label>
+                <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
+                    <button type="button" class="btn btn-default btn-block" style="text-align: left" disabled="disabled">\(\omega_{\mathrm{RBM}}\)</button>
+                </div>
+                <label for="slP1" class="control-label col-auto">=</label>
+                <div class="col-md-4 col-sm-4 col-xs-5">
+                    @Html.EditorFor(model => model.RBM, new { htmlAttributes = new { id = "edRBM", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
+                </div>
+                <label class="control-label col-auto">\(\mathrm{cm}^{-1}\)</label>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-sm-offset-3 col-md-10 col-xs-offset-0_5">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+
+        @using (Ajax.BeginForm("Calculator", "Home", new AjaxOptions
+        {
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "calcResultList",
+            OnFailure = "alert('Connection to server failed. Please try again.')",
+            OnComplete = "MathJax.Hub.Queue(['Typeset',MathJax.Hub])"
+        }))
+        {
+            <div class="row">
+                <h1 id="hint" style="padding: 8px; border-radius: 4px;" class="col-lg-9 col-md-11 col-sm-8 col-xs-9 col-lg-offset-1 col-md-offset-0_5 col-sm-offset-1 col-xs-offset-1">
+                    <small>(n,m) Calculator</small>
+                </h1>
+            </div>
+            <div class="form-group">
+                @Html.AntiForgeryToken()
+                <div hidden>
+                    @Html.EditorFor(model => model.Env)
+                </div>
+                <label for="slP1" class="control-label col-auto" style="margin-left: 10%">(n,m) = (</label>
+                <div class="col-xs-2">
+                    @Html.EditorFor(model => model.NCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type="" } })
+                </div>
+                <label class="control-label col-auto">,</label>
+                <div class="col-xs-2">
+                    @Html.EditorFor(model => model.MCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type = "" } })
+                </div>
+                <label class="control-label col-auto">)</label>
+                <input type="submit" value="Submit" class="btn btn-primary" style="margin-left: 6%" />
+            </div>
+        }
+        <div class="col-md-10 col-sm-8 col-xs-8">
+            @Html.Partial("_Calculator")
         </div>
-        <br />
-        <div class="form-group">
-            <label for="slEnv" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">SWNT Type</label>
-            <div class="col-md-6 col-sm-4 col-xs-8 col-xs-offset-0_5">
-                @Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "slEnv", @class = "form-control selectpicker", disabled = "disabled" })
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="slP1" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">Transition Energy 1</label>
-            <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
-                @Html.DropDownListFor(model => model.P1, ViewBag.slType as List<SelectListItem>, new { id = "slP1", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)"})
-            </div>
-            <label for="slP1" class="control-label col-auto">=</label>
-            <div class="col-md-4 col-sm-4 col-xs-5">
-                @Html.EditorFor(model => model.Val1, new { htmlAttributes = new { id = "edVal1", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
-            </div>
-            <label class="control-label col-auto">\(\mathrm{eV}\)</label>
-        </div>
-        <div class="form-group">
-            <label for="slP2" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">Transition Energy 2</label>
-            <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
-                @Html.DropDownListFor(model => model.P2, ViewBag.slType as List<SelectListItem>, new { id = "slP2", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)", disabled = "disabled" })
-            </div>
-            <label for="slP1" class="control-label col-auto">=</label>
-            <div class="col-md-4 col-sm-4 col-xs-5">
-                @Html.EditorFor(model => model.Val2, new { htmlAttributes = new { id = "edVal2", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
-            </div>
-            <label class="control-label col-auto">\(\mathrm{eV}\)</label>
-        </div>
-        <div class="form-group">
-            <label for="slRBM" class="control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5">RBM</label>
-            <div class="col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5">
-                <button type="button" class="btn btn-default btn-block" style="text-align: left" disabled="disabled">\(\omega_{\mathrm{RBM}}\)</button>
-            </div>
-            <label for="slP1" class="control-label col-auto">=</label>
-            <div class="col-md-4 col-sm-4 col-xs-5">
-                @Html.EditorFor(model => model.RBM, new { htmlAttributes = new { id = "edRBM", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } })
-            </div>
-            <label class="control-label col-auto">\(\mathrm{cm}^{-1}\)</label>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-4 col-sm-offset-3 col-md-10 col-xs-offset-0_5">
-                <input type="submit" value="Submit" class="btn btn-primary" />
-            </div>
-        </div>
+        
     </div>
-}
     <div class="col-md-6 col-xs-12 col-sm-12">
         <table class="table table-striped math">
             @{ 

@@ -66,9 +66,8 @@ namespace NTAssign
         public static int Mod(int n, int m) => (2 * n + m) % 3;
         public static bool IsMetal(int p) => (p + 1) % 3 == 0;
         public static bool IsMetal(int n, int m) => Mod(n, m) == 0;
-        public static double RBMtoDt(double wRBM, int p, int type)
+        public static void GetRBMParameters(int p, int type, out double a, out double b)
         {
-            double a, b;
             switch (type)
             {
                 case 0:
@@ -112,7 +111,16 @@ namespace NTAssign
                 default:
                     throw new ArgumentOutOfRangeException("type", "invalid type");
             }
+        }
+        public static double RBMtoDt(double wRBM, int p, int type)
+        {
+            GetRBMParameters(p, type, out double a, out double b);
             return a / (wRBM - b);
+        }
+        public static double DttoRBM(double dt, int p, int type)
+        {
+            GetRBMParameters(p, type, out double a, out double b);
+            return a / dt + b;
         }
         public static double GetEnergy_Sem(int n, int m, int p, int type) => GetEnergy(Dt(n, m, type), Theta(n, m), p, type, Mod(n, m));
         public static void Swap<T>(ref T a, ref T b)

@@ -20,6 +20,40 @@ namespace NTAssign.Models
         public double? Val2 { get; set; }
         public double? RBM { get; set; }
 
+        public int NCalc { get; set; }
+        public int MCalc { get; set; }
+        
+        public Tuple<List<int>, List<double>> Calculator()
+        {
+            if (NCalc < MCalc)
+            {
+                int t = NCalc;
+                NCalc = MCalc;
+                MCalc = t;
+            }
+
+            if (NCalc <= 6 || MCalc < 0)
+                return null;
+            List<int> li1 = new List<int>();
+            List<double> li2 = new List<double>();
+            for (int i = 0; i < 12; i++)
+                try
+                {
+                    if (IsMetal(p1ToP[i]) != IsMetal(NCalc, MCalc))
+                        continue;
+                    var val = GetEnergy(Dt(NCalc, MCalc, Env), Theta(NCalc, MCalc),
+                        p1ToP[i], Env, IsMetal(NCalc, MCalc) ? i % 2 - 1 : Mod(NCalc, MCalc));
+                    li1.Add(i);
+                    li2.Add(val);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    // pass;
+                }
+            
+            return new Tuple<List<int>, List<double>>(li1, li2);
+        }
+
         public AssignResult GetPlotModel(out PlotModel[] pm)
         {
             if (Val1 is null && Val2 is null)

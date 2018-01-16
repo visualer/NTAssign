@@ -58,7 +58,7 @@ WriteLiteral(" class=\"text-center\"");
 
 WriteLiteral(">\r\n    Refer to: <a");
 
-WriteLiteral(" href=\"http://pubs.acs.org/doi/10.1021/acsnano.7b05860\"");
+WriteLiteral(" href=\"http://pubs.acs.org/doi/pdf/10.1021/acsnano.7b05860\"");
 
 WriteLiteral("><i>ACS Nano</i>, <b>2017</b>, <i>11</i> (10), pp 10509–10518</a>\r\n</h4>\r\n<h4");
 
@@ -151,6 +151,10 @@ WriteLiteral(" style=\"height: 200px; overflow-y: auto;\"");
 WriteLiteral(@">
                 <h4>Update Log</h4>
                 <p>
+                    <b>v1.1.0 &mdash; 2018/1/17</b><br />
+                    - Ajax-based (n,m) calculator is now available. Minor bug fixed.
+                </p>
+                <p>
                     <b>v1.0.1-beta &mdash; 2017/12/20</b><br />
                     - Guiding Video updated.
                 </p>
@@ -168,7 +172,7 @@ WriteLiteral(@">
 ");
 
             
-            #line 51 "..\..\Views\Home\Step1.cshtml"
+            #line 55 "..\..\Views\Home\Step1.cshtml"
 }
 
             

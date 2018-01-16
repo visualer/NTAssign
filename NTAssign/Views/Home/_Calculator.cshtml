@@ -1,0 +1,24 @@
+﻿@* ClassSuffix: _ *@
+@model NTAssign.Models.AssignModel
+
+@{ 
+    var _model = Model.Calculator();
+}
+
+<table class="table table-striped math" id="calcResultList" style="margin-left: 10%">
+    @if (!(_model is null))
+    {
+        <tr>
+            <td>\(\omega_\mathrm{RBM} @(Model.Env == 0 ? @"\ (p=1)" : "") \)</td>
+            <td>\(@Energy.DttoRBM(Energy.Dt(Model.NCalc, Model.MCalc, Model.Env), 0, Model.Env).ToString("f1")
+            \ \mathrm{cm^{-1}}\)</td>
+        </tr>
+        for (int i = 0; i < _model.Item1.Count; i++)
+        {
+            <tr>
+                <td>@NTAssign.Energy.p1Arr[_model.Item1[i]]</td>
+                <td>\(@_model.Item2[i].ToString("f3") \ \mathrm{eV}\)</td>
+            </tr>
+        }
+    }
+</table>

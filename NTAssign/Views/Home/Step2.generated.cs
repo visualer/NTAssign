@@ -73,39 +73,46 @@ WriteLiteral("</small></h1>\r\n<hr />\r\n<div");
 
 WriteLiteral(" class=\"row\"");
 
-WriteLiteral(">\r\n");
-
-            
-            #line 14 "..\..\Views\Home\Step2.cshtml"
- using (Html.BeginForm("Step3", "Home", FormMethod.Post, new { name = "formInput", onsubmit = "return validate(this)" }))
-{
-    
-            
-            #line default
-            #line hidden
-            
-            #line 16 "..\..\Views\Home\Step2.cshtml"
-Write(Html.AntiForgeryToken());
-
-            
-            #line default
-            #line hidden
-            
-            #line 16 "..\..\Views\Home\Step2.cshtml"
-                            
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <div");
+WriteLiteral(">\r\n    <div");
 
 WriteLiteral(" class=\"form-horizontal math col-md-6\"");
 
-WriteLiteral(">\r\n        <div");
+WriteLiteral(">\r\n");
+
+            
+            #line 15 "..\..\Views\Home\Step2.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 15 "..\..\Views\Home\Step2.cshtml"
+         using (Html.BeginForm("Step3", "Home", FormMethod.Post, new { name = "formInput", onsubmit = "return validate(this)" }))
+        {
+            
+            
+            #line default
+            #line hidden
+            
+            #line 17 "..\..\Views\Home\Step2.cshtml"
+       Write(Html.AntiForgeryToken());
+
+            
+            #line default
+            #line hidden
+            
+            #line 17 "..\..\Views\Home\Step2.cshtml"
+                                    
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div");
 
 WriteLiteral(" class=\"row\"");
 
-WriteLiteral(">\r\n            <p");
+WriteLiteral(">\r\n                <p");
 
 WriteLiteral(" id=\"hint\"");
 
@@ -114,148 +121,158 @@ WriteLiteral(" style=\"font-size: 16px; padding: 8px; border-radius: 4px;\"");
 WriteLiteral(" class=\"col-lg-9 col-md-11 col-sm-8 col-xs-9 col-lg-offset-1 col-md-offset-0_5 co" +
 "l-sm-offset-1 col-xs-offset-1\"");
 
-WriteLiteral(">\r\n                Please input at least 2 values.<br />\r\n                Only pa" +
-"ired transition energies are allowed to input in the current version.\r\n         " +
-"   </p>\r\n        </div>\r\n        <br />\r\n        <div");
+WriteLiteral(">\r\n                    Please input at least 2 values.<br />\r\n                   " +
+" Only paired transition energies are allowed to input in the current version.\r\n " +
+"               </p>\r\n            </div>\r\n");
+
+WriteLiteral("            <br />\r\n");
+
+WriteLiteral("            <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n            <label");
+WriteLiteral(">\r\n                <label");
 
 WriteLiteral(" for=\"slEnv\"");
 
 WriteLiteral(" class=\"control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5\"");
 
-WriteLiteral(">SWNT Type</label>\r\n            <div");
+WriteLiteral(">SWNT Type</label>\r\n                <div");
 
 WriteLiteral(" class=\"col-md-6 col-sm-4 col-xs-8 col-xs-offset-0_5\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("                    ");
 
             
-            #line 28 "..\..\Views\Home\Step2.cshtml"
-           Write(Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "slEnv", @class = "form-control selectpicker", disabled = "disabled" }));
+            #line 29 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.DropDownListFor(model => model.Env, ViewBag.slEnv as List<SelectListItem>, new { id = "slEnv", @class = "form-control selectpicker", disabled = "disabled" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n        <div");
+WriteLiteral("\r\n                </div>\r\n            </div>\r\n");
+
+WriteLiteral("            <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n            <label");
+WriteLiteral(">\r\n                <label");
 
 WriteLiteral(" for=\"slP1\"");
 
 WriteLiteral(" class=\"control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5\"");
 
-WriteLiteral(">Transition Energy 1</label>\r\n            <div");
+WriteLiteral(">Transition Energy 1</label>\r\n                <div");
 
 WriteLiteral(" class=\"col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("                    ");
 
             
-            #line 34 "..\..\Views\Home\Step2.cshtml"
-           Write(Html.DropDownListFor(model => model.P1, ViewBag.slType as List<SelectListItem>, new { id = "slP1", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)"}));
+            #line 35 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.DropDownListFor(model => model.P1, ViewBag.slType as List<SelectListItem>, new { id = "slP1", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n            <label");
+WriteLiteral("\r\n                </div>\r\n                <label");
 
 WriteLiteral(" for=\"slP1\"");
 
 WriteLiteral(" class=\"control-label col-auto\"");
 
-WriteLiteral(">=</label>\r\n            <div");
+WriteLiteral(">=</label>\r\n                <div");
 
 WriteLiteral(" class=\"col-md-4 col-sm-4 col-xs-5\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("                    ");
 
             
-            #line 38 "..\..\Views\Home\Step2.cshtml"
-           Write(Html.EditorFor(model => model.Val1, new { htmlAttributes = new { id = "edVal1", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
+            #line 39 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.EditorFor(model => model.Val1, new { htmlAttributes = new { id = "edVal1", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n            <label");
+WriteLiteral("\r\n                </div>\r\n                <label");
 
 WriteLiteral(" class=\"control-label col-auto\"");
 
-WriteLiteral(">\\(\\mathrm{eV}\\)</label>\r\n        </div>\r\n        <div");
+WriteLiteral(">\\(\\mathrm{eV}\\)</label>\r\n            </div>\r\n");
+
+WriteLiteral("            <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n            <label");
+WriteLiteral(">\r\n                <label");
 
 WriteLiteral(" for=\"slP2\"");
 
 WriteLiteral(" class=\"control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5\"");
 
-WriteLiteral(">Transition Energy 2</label>\r\n            <div");
+WriteLiteral(">Transition Energy 2</label>\r\n                <div");
 
 WriteLiteral(" class=\"col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("                    ");
 
             
-            #line 45 "..\..\Views\Home\Step2.cshtml"
-           Write(Html.DropDownListFor(model => model.P2, ViewBag.slType as List<SelectListItem>, new { id = "slP2", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)", disabled = "disabled" }));
+            #line 46 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.DropDownListFor(model => model.P2, ViewBag.slType as List<SelectListItem>, new { id = "slP2", @class = "form-control selectpicker slp", title = @"\(E_{ii}\)", disabled = "disabled" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n            <label");
+WriteLiteral("\r\n                </div>\r\n                <label");
 
 WriteLiteral(" for=\"slP1\"");
 
 WriteLiteral(" class=\"control-label col-auto\"");
 
-WriteLiteral(">=</label>\r\n            <div");
+WriteLiteral(">=</label>\r\n                <div");
 
 WriteLiteral(" class=\"col-md-4 col-sm-4 col-xs-5\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("                    ");
 
             
-            #line 49 "..\..\Views\Home\Step2.cshtml"
-           Write(Html.EditorFor(model => model.Val2, new { htmlAttributes = new { id = "edVal2", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
+            #line 50 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.EditorFor(model => model.Val2, new { htmlAttributes = new { id = "edVal2", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n            <label");
+WriteLiteral("\r\n                </div>\r\n                <label");
 
 WriteLiteral(" class=\"control-label col-auto\"");
 
-WriteLiteral(">\\(\\mathrm{eV}\\)</label>\r\n        </div>\r\n        <div");
+WriteLiteral(">\\(\\mathrm{eV}\\)</label>\r\n            </div>\r\n");
+
+WriteLiteral("            <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n            <label");
+WriteLiteral(">\r\n                <label");
 
 WriteLiteral(" for=\"slRBM\"");
 
 WriteLiteral(" class=\"control-label col-md-4 col-sm-3 col-xs-12 col-xs-offset-0_5\"");
 
-WriteLiteral(">RBM</label>\r\n            <div");
+WriteLiteral(">RBM</label>\r\n                <div");
 
 WriteLiteral(" class=\"col-lg-2 col-md-2_5 col-sm-2 col-xs-3 col-xs-offset-0_5\"");
 
-WriteLiteral(">\r\n                <button");
+WriteLiteral(">\r\n                    <button");
 
 WriteLiteral(" type=\"button\"");
 
@@ -265,40 +282,43 @@ WriteLiteral(" style=\"text-align: left\"");
 
 WriteLiteral(" disabled=\"disabled\"");
 
-WriteLiteral(">\\(\\omega_{\\mathrm{RBM}}\\)</button>\r\n            </div>\r\n            <label");
+WriteLiteral(">\\(\\omega_{\\mathrm{RBM}}\\)</button>\r\n                </div>\r\n                <lab" +
+"el");
 
 WriteLiteral(" for=\"slP1\"");
 
 WriteLiteral(" class=\"control-label col-auto\"");
 
-WriteLiteral(">=</label>\r\n            <div");
+WriteLiteral(">=</label>\r\n                <div");
 
 WriteLiteral(" class=\"col-md-4 col-sm-4 col-xs-5\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("                    ");
 
             
-            #line 60 "..\..\Views\Home\Step2.cshtml"
-           Write(Html.EditorFor(model => model.RBM, new { htmlAttributes = new { id = "edRBM", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
+            #line 61 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.EditorFor(model => model.RBM, new { htmlAttributes = new { id = "edRBM", @class = "form-control", pattern = @"[\d]+\.?[\d]*" } }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n            <label");
+WriteLiteral("\r\n                </div>\r\n                <label");
 
 WriteLiteral(" class=\"control-label col-auto\"");
 
-WriteLiteral(">\\(\\mathrm{cm}^{-1}\\)</label>\r\n        </div>\r\n        <div");
+WriteLiteral(">\\(\\mathrm{cm}^{-1}\\)</label>\r\n            </div>\r\n");
+
+WriteLiteral("            <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(">\r\n            <div");
+WriteLiteral(">\r\n                <div");
 
 WriteLiteral(" class=\"col-md-offset-4 col-sm-offset-3 col-md-10 col-xs-offset-0_5\"");
 
-WriteLiteral(">\r\n                <input");
+WriteLiteral(">\r\n                    <input");
 
 WriteLiteral(" type=\"submit\"");
 
@@ -306,16 +326,161 @@ WriteLiteral(" value=\"Submit\"");
 
 WriteLiteral(" class=\"btn btn-primary\"");
 
-WriteLiteral(" />\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
+WriteLiteral(" />\r\n                </div>\r\n            </div>\r\n");
 
             
             #line 70 "..\..\Views\Home\Step2.cshtml"
-}
+        }
 
             
             #line default
             #line hidden
-WriteLiteral("    <div");
+WriteLiteral("\r\n");
+
+            
+            #line 72 "..\..\Views\Home\Step2.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 72 "..\..\Views\Home\Step2.cshtml"
+         using (Ajax.BeginForm("Calculator", "Home", new AjaxOptions
+        {
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "calcResultList",
+            OnFailure = "alert('Connection to server failed. Please try again.')",
+            OnComplete = "MathJax.Hub.Queue(['Typeset',MathJax.Hub])"
+        }))
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n                <h1");
+
+WriteLiteral(" id=\"hint\"");
+
+WriteLiteral(" style=\"padding: 8px; border-radius: 4px;\"");
+
+WriteLiteral(" class=\"col-lg-9 col-md-11 col-sm-8 col-xs-9 col-lg-offset-1 col-md-offset-0_5 co" +
+"l-sm-offset-1 col-xs-offset-1\"");
+
+WriteLiteral(">\r\n                    <small>(n,m) Calculator</small>\r\n                </h1>\r\n  " +
+"          </div>\r\n");
+
+WriteLiteral("            <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 87 "..\..\Views\Home\Step2.cshtml"
+           Write(Html.AntiForgeryToken());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                <div hidden>\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 89 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.EditorFor(model => model.Env));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                </div>\r\n                <label");
+
+WriteLiteral(" for=\"slP1\"");
+
+WriteLiteral(" class=\"control-label col-auto\"");
+
+WriteLiteral(" style=\"margin-left: 10%\"");
+
+WriteLiteral(">(n,m) = (</label>\r\n                <div");
+
+WriteLiteral(" class=\"col-xs-2\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 93 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.EditorFor(model => model.NCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type="" } }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                </div>\r\n                <label");
+
+WriteLiteral(" class=\"control-label col-auto\"");
+
+WriteLiteral(">,</label>\r\n                <div");
+
+WriteLiteral(" class=\"col-xs-2\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 97 "..\..\Views\Home\Step2.cshtml"
+               Write(Html.EditorFor(model => model.MCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type = "" } }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                </div>\r\n                <label");
+
+WriteLiteral(" class=\"control-label col-auto\"");
+
+WriteLiteral(">)</label>\r\n                <input");
+
+WriteLiteral(" type=\"submit\"");
+
+WriteLiteral(" value=\"Submit\"");
+
+WriteLiteral(" class=\"btn btn-primary\"");
+
+WriteLiteral(" style=\"margin-left: 6%\"");
+
+WriteLiteral(" />\r\n            </div>\r\n");
+
+            
+            #line 102 "..\..\Views\Home\Step2.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
+
+WriteLiteral(" class=\"col-md-10 col-sm-8 col-xs-8\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 104 "..\..\Views\Home\Step2.cshtml"
+       Write(Html.Partial("_Calculator"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n        \r\n    </div>\r\n    <div");
 
 WriteLiteral(" class=\"col-md-6 col-xs-12 col-sm-12\"");
 
@@ -326,13 +491,13 @@ WriteLiteral(" class=\"table table-striped math\"");
 WriteLiteral(">\r\n");
 
             
-            #line 73 "..\..\Views\Home\Step2.cshtml"
+            #line 110 "..\..\Views\Home\Step2.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 73 "..\..\Views\Home\Step2.cshtml"
+            #line 110 "..\..\Views\Home\Step2.cshtml"
                
                 var li = Model.GetParams();
                 var li1 = li.Item1;
@@ -345,13 +510,13 @@ WriteLiteral(">\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 79 "..\..\Views\Home\Step2.cshtml"
+            #line 116 "..\..\Views\Home\Step2.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 79 "..\..\Views\Home\Step2.cshtml"
+            #line 116 "..\..\Views\Home\Step2.cshtml"
              for (int i = 0; i < li1.Count; i++)
             {
 
@@ -361,13 +526,13 @@ WriteLiteral("\r\n");
 WriteLiteral("                <tr>\r\n");
 
             
-            #line 82 "..\..\Views\Home\Step2.cshtml"
+            #line 119 "..\..\Views\Home\Step2.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 82 "..\..\Views\Home\Step2.cshtml"
+            #line 119 "..\..\Views\Home\Step2.cshtml"
                  for (int j = 0; j < li1[i].Length; j++)
                 {
 
@@ -376,20 +541,20 @@ WriteLiteral("                <tr>\r\n");
             #line hidden
 WriteLiteral("                    <td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 4517), Tuple.Create("", 4536)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 6566), Tuple.Create("", 6585)
             
-            #line 84 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 4526), Tuple.Create<System.Object, System.Int32>(li2[i][j]
+            #line 121 "..\..\Views\Home\Step2.cshtml"
+, Tuple.Create(Tuple.Create("", 6575), Tuple.Create<System.Object, System.Int32>(li2[i][j]
             
             #line default
             #line hidden
-, 4526), false)
+, 6575), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 84 "..\..\Views\Home\Step2.cshtml"
+            #line 121 "..\..\Views\Home\Step2.cshtml"
                                       Write(Html.Raw(li1[i][j]));
 
             
@@ -398,7 +563,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n");
 
             
-            #line 85 "..\..\Views\Home\Step2.cshtml"
+            #line 122 "..\..\Views\Home\Step2.cshtml"
                 }
 
             
@@ -407,7 +572,7 @@ WriteLiteral("</td>\r\n");
 WriteLiteral("                </tr>\r\n");
 
             
-            #line 87 "..\..\Views\Home\Step2.cshtml"
+            #line 124 "..\..\Views\Home\Step2.cshtml"
             }
 
             
@@ -419,20 +584,20 @@ WriteLiteral(" style=\"text-align: left;\"");
 
 WriteLiteral("><td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 4666), Tuple.Create("", 4688)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 6715), Tuple.Create("", 6737)
             
-            #line 88 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 4675), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
+            #line 125 "..\..\Views\Home\Step2.cshtml"
+, Tuple.Create(Tuple.Create("", 6724), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
             
             #line default
             #line hidden
-, 4675), false)
+, 6724), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 88 "..\..\Views\Home\Step2.cshtml"
+            #line 125 "..\..\Views\Home\Step2.cshtml"
                                                                Write(Html.Raw(li3));
 
             
@@ -445,7 +610,7 @@ DefineSection("scripts", () => {
 WriteLiteral("\r\n<script>\r\n    $(page2Load(");
 
             
-            #line 95 "..\..\Views\Home\Step2.cshtml"
+            #line 132 "..\..\Views\Home\Step2.cshtml"
             Write(Html.Raw(Model.Env));
 
             
