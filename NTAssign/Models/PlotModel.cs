@@ -33,7 +33,10 @@ namespace NTAssign.Models
             var q = from p in all
                     group p by 2 * p[0] + p[1] into g
                     orderby g.Key
-                    select g.OrderBy(elem => elem[2]);
+                    select g.OrderBy(elem => elem[0]);
+            // note that average energy may not increase monotonously as n in (n,m) increases.
+            // thus elem => elem[2] is wrong.
+            // test: S11 = 1.420, S22 = 2.134 as (6,4), see branch 2n + m = 16
             List<string> ll = new List<string>();
             List<string> ll_label = new List<string>();
             foreach (var i in q)

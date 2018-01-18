@@ -75,7 +75,7 @@
             InsertionMode = InsertionMode.Replace,
             UpdateTargetId = "calcResultList",
             OnFailure = "alert('Connection to server failed. Please try again.')",
-            OnComplete = "MathJax.Hub.Queue(['Typeset',MathJax.Hub])"
+            OnComplete = "MathJax.Hub.Queue(['Typeset', MathJax.Hub])"
         }))
         {
             <div class="row">
@@ -90,14 +90,14 @@
                 </div>
                 <label for="slP1" class="control-label col-auto" style="margin-left: 10%">(n,m) = (</label>
                 <div class="col-xs-2">
-                    @Html.EditorFor(model => model.NCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type="" } })
+                    @Html.EditorFor(model => model.NCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type = "" } })
                 </div>
                 <label class="control-label col-auto">,</label>
                 <div class="col-xs-2">
                     @Html.EditorFor(model => model.MCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type = "" } })
                 </div>
                 <label class="control-label col-auto">)</label>
-                <input type="submit" value="Submit" class="btn btn-primary" style="margin-left: 6%" />
+                <input type="submit" value="Calculate" class="btn btn-primary" style="margin-left: 6%" />
             </div>
         }
         <div class="col-md-10 col-sm-8 col-xs-8">

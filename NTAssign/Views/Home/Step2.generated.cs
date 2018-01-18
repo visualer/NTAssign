@@ -351,7 +351,7 @@ WriteLiteral("\r\n");
             InsertionMode = InsertionMode.Replace,
             UpdateTargetId = "calcResultList",
             OnFailure = "alert('Connection to server failed. Please try again.')",
-            OnComplete = "MathJax.Hub.Queue(['Typeset',MathJax.Hub])"
+            OnComplete = "MathJax.Hub.Queue(['Typeset', MathJax.Hub])"
         }))
         {
 
@@ -418,7 +418,7 @@ WriteLiteral("                    ");
 
             
             #line 93 "..\..\Views\Home\Step2.cshtml"
-               Write(Html.EditorFor(model => model.NCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type="" } }));
+               Write(Html.EditorFor(model => model.NCalc, new { htmlAttributes = new { @class = "form-control", pattern = @"\d+", type = "" } }));
 
             
             #line default
@@ -450,7 +450,7 @@ WriteLiteral(">)</label>\r\n                <input");
 
 WriteLiteral(" type=\"submit\"");
 
-WriteLiteral(" value=\"Submit\"");
+WriteLiteral(" value=\"Calculate\"");
 
 WriteLiteral(" class=\"btn btn-primary\"");
 
@@ -541,14 +541,14 @@ WriteLiteral("                <tr>\r\n");
             #line hidden
 WriteLiteral("                    <td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 6566), Tuple.Create("", 6585)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 6572), Tuple.Create("", 6591)
             
             #line 121 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 6575), Tuple.Create<System.Object, System.Int32>(li2[i][j]
+, Tuple.Create(Tuple.Create("", 6581), Tuple.Create<System.Object, System.Int32>(li2[i][j]
             
             #line default
             #line hidden
-, 6575), false)
+, 6581), false)
 );
 
 WriteLiteral(">");
@@ -584,14 +584,14 @@ WriteLiteral(" style=\"text-align: left;\"");
 
 WriteLiteral("><td");
 
-WriteAttribute("colspan", Tuple.Create(" colspan=", 6715), Tuple.Create("", 6737)
+WriteAttribute("colspan", Tuple.Create(" colspan=", 6721), Tuple.Create("", 6743)
             
             #line 125 "..\..\Views\Home\Step2.cshtml"
-, Tuple.Create(Tuple.Create("", 6724), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
+, Tuple.Create(Tuple.Create("", 6730), Tuple.Create<System.Object, System.Int32>(li2[0].Sum()
             
             #line default
             #line hidden
-, 6724), false)
+, 6730), false)
 );
 
 WriteLiteral(">");

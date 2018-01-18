@@ -43,6 +43,8 @@ function page1Load() {
 }
 
 function page2Load() {
+    $("#NCalc").removeAttr("value");
+    $("#MCalc").removeAttr("value");
     //document.formInput.reset();
     var $slp = $(".slp"), $another = $("#slP2");
     $slp.find("option").removeAttr("selected");

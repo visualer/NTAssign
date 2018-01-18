@@ -19,8 +19,9 @@ namespace NTAssign.Models
         public int P2 { get; set; }
         public double? Val2 { get; set; }
         public double? RBM { get; set; }
-
+        [Range(0, 60)]
         public int NCalc { get; set; }
+        [Range(0, 60)]
         public int MCalc { get; set; }
         
         public Tuple<List<int>, List<double>> Calculator()
@@ -199,6 +200,7 @@ namespace NTAssign.Models
         {
             // x: average y: splitting
             double Dist(double x1, double y1, double x2, double y2) => Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+            double dist_(double[] e) => Dist(e[2], e[3], pm.point[0], pm.point[1]);
             double deltaX = 0.6, maxY = IsMetal(pm.p_lesser) ? 0.6 : pm.point[1] + 0.6, minY = IsMetal(pm.p_lesser) ? -0.1 : pm.point[1] - 0.6;
 
             pm.all = GetList(pm.p_lesser, pm.type)
@@ -222,7 +224,7 @@ namespace NTAssign.Models
 
             void ProcessOutput()
             {
-                pm.result = query.OrderBy(e => Dist(e[2], e[3], pm.point[0], pm.point[1])).ToList();
+                pm.result = query.OrderBy(dist_).ToList();
                 for (int i = 0; i < pm.result.Count; i++)
                     pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" +
                         (i != pm.result.Count - 1 ? ", " : "");
@@ -235,8 +237,10 @@ namespace NTAssign.Models
                 pm.result = new List<double[]>();
                 return pm;
             }
+            
             if (pm.pointType == "red")
             {
+                pm.ar = AssignResult.accurate;
                 // query for accurate 
                 if (pm.bluePoint != null)
                 {
@@ -258,15 +262,25 @@ namespace NTAssign.Models
                 }
                 dymax_p = 0.015;
                 dymin_p = -0.015;
-
+                
                 if (query.Count() > 0)
                 {
-                    pm.ar = AssignResult.accurate;
+                    // accurate
                     pm.resultString += "The assignment result is:<br /><font style=\"font-size: 28px;\">";
                     ProcessOutput();
                     return pm;
                 }
-                
+
+                var tmp = pm.all.OrderBy(dist_).ToList();
+                if (dist_(tmp[0]) / dist_(tmp[1]) <= 0.4)
+                {
+                    query = new List<double[]> { tmp[0] };
+                    // also accurate
+                    pm.resultString += "The assignment result is:<br /><font style=\"font-size: 28px;\">";
+                    ProcessOutput();
+                    return pm;
+                }
+
                 dxmin_p = -0.040;
                 dxmax_p = 0.0126;
                 dymax_p = 0.030;
@@ -443,7 +457,7 @@ namespace NTAssign.Models
             switch (Env)
             {
                 case 0:
-                    arr[arr.Count - 1][0] += @"$$\begin{align*}&p=1,2:A=204\ \mathrm{nm\ cm^{-1}},B=27\ \mathrm{cm^{-1}}\quad[3]\\&p=3:A=200\ \mathrm{nm\ cm^{-1}},B=26\ \mathrm{cm^{-1}}\quad[1]\\&\mathrm{others}:A=228\ \mathrm{nm\ cm^{-1}},B=0\ \mathrm{cm^{-1}}\quad[2]\end{align*}$$";
+                    arr[arr.Count - 1][0] += @"$$\begin{align*}& p=1,2:A=204\ \mathrm{nm\ cm^{-1}},B=27\ \mathrm{cm^{-1}}\quad[3]\\& p=3:A=200\ \mathrm{nm\ cm^{-1}},B=26\ \mathrm{cm^{-1}}\quad[1]\\& \mathrm{others}:A=228\ \mathrm{nm\ cm^{-1}},B=0\ \mathrm{cm^{-1}}\quad[2]\end{align*}$$";
                     reflist.Add(3);
                     break;
                 case 1:
