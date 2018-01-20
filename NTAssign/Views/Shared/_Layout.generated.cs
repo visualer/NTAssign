@@ -123,7 +123,7 @@ WriteLiteral(" class=\"container body-content\"");
 
 WriteLiteral(">\r\n        <a");
 
-WriteLiteral(" href=\"http://www.chem.pku.edu.cn/liy/labhomepage\"");
+WriteLiteral(" href=\"http://old.chem.pku.edu.cn/liy/labhomepage\"");
 
 WriteLiteral(" target=\"_blank\"");
 

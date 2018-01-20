@@ -199,10 +199,17 @@ namespace NTAssign.Models
         public PlotModel Assign(PlotModel pm, int mod = -1)
         {
             // x: average y: splitting
+            double dxmin_p = -1, dxmax_p = -1, dymin_p = -1, dymax_p = -1;
             double Dist(double x1, double y1, double x2, double y2) => Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-            double dist_(double[] e) => Dist(e[2], e[3], pm.point[0], pm.point[1]);
+            double Dist_(double[] e) => Dist(e[2], e[3], pm.point[0], pm.point[1]);
             double deltaX = 0.6, maxY = IsMetal(pm.p_lesser) ? 0.6 : pm.point[1] + 0.6, minY = IsMetal(pm.p_lesser) ? -0.1 : pm.point[1] - 0.6;
-
+            void SetBounds(double dxmin_, double dxmax_, double dymin_, double dymax_)
+            {
+                dxmin_p = dxmin_;
+                dxmax_p = dxmax_;
+                dymin_p = dymin_;
+                dymax_p = dymax_;
+            }
             pm.all = GetList(pm.p_lesser, pm.type)
                     .Where(e => (
                     e[2] >= pm.point[0] - deltaX &&
@@ -212,19 +219,18 @@ namespace NTAssign.Models
                     )
                     .ToList();
 
-            double dxmin_p = -1, dxmax_p = -1, dymin_p = -1, dymax_p = -1;
-            
             var query = pm.all
                 .Where(e => (
                 (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) &&
                 pm.point[0] - e[2] >= dxmin_p && pm.point[0] - e[2] <= dxmax_p &&
                 pm.point[1] - e[3] <= dymax_p && pm.point[1] - e[3] >= dymin_p
                 ));
+
             // deferred execution
 
             void ProcessOutput()
             {
-                pm.result = query.OrderBy(dist_).ToList();
+                pm.result = query.OrderBy(Dist_).ToList();
                 for (int i = 0; i < pm.result.Count; i++)
                     pm.resultString += "<b>(" + (int)pm.result[i][0] + "," + (int)pm.result[i][1] + ")</b>" +
                         (i != pm.result.Count - 1 ? ", " : "");
@@ -241,61 +247,59 @@ namespace NTAssign.Models
             if (pm.pointType == "red")
             {
                 pm.ar = AssignResult.accurate;
+
                 // query for accurate 
+
                 if (pm.bluePoint != null)
                 {
                     if (pm.bluePoint[0] - pm.point[0] < 0.02)
-                    {
-                        dxmin_p = -0.008;
-                        dxmax_p = 0.008;
-                    }
+                        SetBounds(-0.008, 0.008, -0.015, 0.015);
                     else
-                    {
-                        dxmin_p = -0.030;
-                        dxmax_p = -0.005; // TODO: NOTICE HERE
-                    }
+                        SetBounds(-0.030, -0.005, -0.015, 0.015);
                 }
                 else
-                {
-                    dxmin_p = -0.025;
-                    dxmax_p = 0.008;
-                }
-                dymax_p = 0.015;
-                dymin_p = -0.015;
+                    SetBounds(-0.025, 0.008, -0.015, 0.015);
                 
                 if (query.Count() > 0)
                 {
                     // accurate
+
                     pm.resultString += "The assignment result is:<br /><font style=\"font-size: 28px;\">";
                     ProcessOutput();
                     return pm;
                 }
 
-                var tmp = pm.all.OrderBy(dist_).ToList();
-                if (dist_(tmp[0]) / dist_(tmp[1]) <= 0.4)
+                // else: the nearest point must have exceeded the accurate distance 
+                // so we can just give an upperbound in addition to the 30%/40% criteria
+                // note that accurate is divided in 2 parts:
+                // 1st is the proximity of the sample to the nearest point.
+                // this can be measured through Euclidean distance, or a rectangle range as a substitute.
+                // 2nd is the resolution of the local area of the graph. 
+                // this is a local, and intrinstic character of the graph... but now the problem
+                // seems trivial. and if multiple results are detected inside "accurate",
+                // the distance ratio mechanism will not work, which is related to the 2nd problem.
+                // and the "listing ALL instead of the NEAREST"-inside-"accurate"-range mechanism
+                // isn't affected by the 2nd problem.
+                // here, the upperbound is set to the "no match" limit.
+
+                var tmp = pm.all.OrderBy(Dist_).ToList();
+                SetBounds(-0.040, 0.040, -0.070, 0.070);
+                if (Dist_(tmp[0]) / Dist_(tmp[1]) <= 0.4 && query.Count() != 0)
                 {
-                    query = new List<double[]> { tmp[0] };
                     // also accurate
+
+                    query = new List<double[]> { tmp[0] };
                     pm.resultString += "The assignment result is:<br /><font style=\"font-size: 28px;\">";
                     ProcessOutput();
                     return pm;
                 }
-
-                dxmin_p = -0.040;
-                dxmax_p = 0.0126;
-                dymax_p = 0.030;
-                dymin_p = -0.030;
-                
+                SetBounds(-0.040, 0.0126, -0.030, 0.030);
             }
             else
-            {
-                dymin_p = -0.070;
-                dymax_p = 0.070;
-                dxmax_p = 0.040;
-                dxmin_p = -0.040;
-            }
-           
+                SetBounds(-0.040, 0.040, -0.070, 0.070);
+
             // query for likely
+
             if (query.Count() > 0)
             {
                 pm.ar = AssignResult.possible;
@@ -303,13 +307,12 @@ namespace NTAssign.Models
                 ProcessOutput();
                 return pm;
             }
+
             // use the green criteria and query again for no match.
             // and it's easy to see that green point, if not returned in the previous step,
             // will not give results in this step.
-            dymin_p = -0.070;
-            dymax_p = 0.070;
-            dxmax_p = 0.040;
-            dxmin_p = -0.040;  
+
+            SetBounds(-0.040, 0.040, -0.070, 0.070);
             if (query.Count() == 0)
             {
                 pm.ar = AssignResult.error;

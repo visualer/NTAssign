@@ -151,8 +151,8 @@ WriteLiteral(" style=\"height: 200px; overflow-y: auto;\"");
 WriteLiteral(@">
                 <h4>Update Log</h4>
                 <p>
-                    <b>v1.1.0 &mdash; 2018/1/17</b><br />
-                    - Ajax-based (n,m) calculator is now available. Minor bug fixed.
+                    <b>v1.1.1 &mdash; 2018/1/19</b><br />
+                    - Ajax-based (n,m) calculator is now available. Assignment algorithm Updated. Minor bug fixed.
                 </p>
                 <p>
                     <b>v1.0.1-beta &mdash; 2017/12/20</b><br />

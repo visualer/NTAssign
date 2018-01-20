@@ -295,7 +295,7 @@ namespace NTAssign
         public static Dictionary<int, double[][]> GetRBMArray(int p_lesser, int type)
         {
             var d = new Dictionary<int, double[][]>();
-            double cos3ThetaMax = 40;
+            double cos3ThetaMax = 60;
             for (int rbm = wRBM_min; rbm <= wRBM_max; rbm += 10)
             {
                 double dt = RBMtoDt(rbm, p_lesser, type);
@@ -304,7 +304,7 @@ namespace NTAssign
                 {
                     if (IsMetal(p_lesser))
                     {
-                        // fix the bug which leads to large rbm returning to the smalle
+                        // fix the bug which leads to large rbm returning to the smaller
                         double plus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, 0); //should it be higher?
                         double minus = GetEnergy_Cos3Theta(dt, cos3ThetaMax, p_lesser, type, -1);
                         t.Add(new double[] { (plus + minus) / 2, plus - minus });
