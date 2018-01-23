@@ -23,7 +23,9 @@ namespace NTAssign.Models
         public int NCalc { get; set; }
         [Range(0, 60)]
         public int MCalc { get; set; }
-        
+
+        public double Uncertainty;
+
         public Tuple<List<int>, List<double>> Calculator()
         {
             if (NCalc < MCalc)
@@ -57,15 +59,22 @@ namespace NTAssign.Models
 
         public AssignResult GetPlotModel(out PlotModel[] pm)
         {
+            int DecimalDigits(string d) => d.Length - (d.IndexOf(".") == -1 ? d.Length : d.IndexOf(".") - 1);
+            
             if (Val1 is null && Val2 is null)
             {
                 pm = null;
                 throw new UnauthorizedAccessException();
             }
             else if (Val1 is null || Val2 is null)
+            {
+                Uncertainty = 2.0 / Math.Pow(10, DecimalDigits((Val1 ?? Val2.Value).ToString()));
                 return (pm = new PlotModel[] { E1R1() })[0].ar;
+            }
             else
             {
+                Uncertainty = 2.0 / Math.Pow(10, 
+                    Math.Min(DecimalDigits(Val1.Value.ToString()), DecimalDigits(Val2.Value.ToString())));
                 return (pm = E2())[0].ar;
             }
         }
@@ -210,23 +219,36 @@ namespace NTAssign.Models
                 dymin_p = dymin_;
                 dymax_p = dymax_;
             }
+            
+            if (pm.pointType == "none")
+            {
+                pm.ar = AssignResult.error;
+                pm.result = new List<double[]>();
+                return pm;
+            }
+
+            if (Uncertainty > 0.2)
+            {
+                pm.resultString = "Input uncertainty too large. Please give more significant figures.";
+                pm.ar = AssignResult.error;
+                pm.result = new List<double[]>();
+                return pm;
+            }
+
             pm.all = GetList(pm.p_lesser, pm.type)
-                    .Where(e => (
-                    e[2] >= pm.point[0] - deltaX &&
-                    e[2] <= pm.point[0] + deltaX && 
-                    e[3] <= maxY && 
-                    e[3] >= minY)
-                    )
+                    .Where(e => (e[2] >= pm.point[0] - deltaX && e[2] <= pm.point[0] + deltaX &&
+                    e[3] <= maxY && e[3] >= minY))
                     .ToList();
 
             var query = pm.all
                 .Where(e => (
                 (mod == -1 || IsMetal(pm.p_lesser) || mod == Mod((int)e[0], (int)e[1])) &&
                 pm.point[0] - e[2] >= dxmin_p && pm.point[0] - e[2] <= dxmax_p &&
-                pm.point[1] - e[3] <= dymax_p && pm.point[1] - e[3] >= dymin_p
+                pm.point[1] - e[3] >= dymin_p && pm.point[1] - e[3] <= dymax_p
                 ));
 
-            // deferred execution
+            SetBounds(-Uncertainty, Uncertainty, -Uncertainty, Uncertainty);
+            var uc = query.ToList(); // query once to get uncertainty range
 
             void ProcessOutput()
             {
@@ -237,58 +259,21 @@ namespace NTAssign.Models
                 pm.resultString += "</font>";
             }
 
-            if (pm.pointType == "none")
-            {
-                pm.ar = AssignResult.error;
-                pm.result = new List<double[]>();
-                return pm;
-            }
-            
             if (pm.pointType == "red")
             {
-                pm.ar = AssignResult.accurate;
-
-                // query for accurate 
-
                 if (pm.bluePoint != null)
                 {
                     if (pm.bluePoint[0] - pm.point[0] < 0.02)
                         SetBounds(-0.008, 0.008, -0.015, 0.015);
                     else
-                        SetBounds(-0.030, -0.005, -0.015, 0.015);
+                        SetBounds(-0.030, -0.005, -0.015, 0.015); // don't change at this moment
                 }
                 else
-                    SetBounds(-0.025, 0.008, -0.015, 0.015);
-                
-                if (query.Count() > 0)
+                    SetBounds(-0.020, 0.008, -0.015, 0.015);
+
+                if (query.Count() == 1 && uc.Count <= 1)
                 {
-                    // accurate
-
-                    pm.resultString += "The assignment result is:<br /><font style=\"font-size: 28px;\">";
-                    ProcessOutput();
-                    return pm;
-                }
-
-                // else: the nearest point must have exceeded the accurate distance 
-                // so we can just give an upperbound in addition to the 30%/40% criteria
-                // note that accurate is divided in 2 parts:
-                // 1st is the proximity of the sample to the nearest point.
-                // this can be measured through Euclidean distance, or a rectangle range as a substitute.
-                // 2nd is the resolution of the local area of the graph. 
-                // this is a local, and intrinstic character of the graph... but now the problem
-                // seems trivial. and if multiple results are detected inside "accurate",
-                // the distance ratio mechanism will not work, which is related to the 2nd problem.
-                // and the "listing ALL instead of the NEAREST"-inside-"accurate"-range mechanism
-                // isn't affected by the 2nd problem.
-                // here, the upperbound is set to the "no match" limit.
-
-                var tmp = pm.all.OrderBy(Dist_).ToList();
-                SetBounds(-0.040, 0.040, -0.070, 0.070);
-                if (Dist_(tmp[0]) / Dist_(tmp[1]) <= 0.4 && query.Count() != 0)
-                {
-                    // also accurate
-
-                    query = new List<double[]> { tmp[0] };
+                    pm.ar = AssignResult.accurate;
                     pm.resultString += "The assignment result is:<br /><font style=\"font-size: 28px;\">";
                     ProcessOutput();
                     return pm;
@@ -298,7 +283,7 @@ namespace NTAssign.Models
             else
                 SetBounds(-0.040, 0.040, -0.070, 0.070);
 
-            // query for likely
+            query.Union(uc); // will this cause query to become static? TODO: needs test
 
             if (query.Count() > 0)
             {
@@ -313,19 +298,21 @@ namespace NTAssign.Models
             // will not give results in this step.
 
             SetBounds(-0.040, 0.040, -0.070, 0.070);
-            if (query.Count() == 0)
+            var tmp = pm.all.OrderBy(Dist_).ToList();
+            if (Dist_(tmp[0]) / Dist_(tmp[1]) <= 0.5 && query.Count() != 0) // 50% criteria
             {
-                pm.ar = AssignResult.error;
-                pm.resultString = "Invalid input: out of range. Please check your input.";
-                pm.result = new List<double[]>();
+                pm.ar = AssignResult.impossible;
+                query = new List<double[]> { tmp[0] };
+                pm.resultString += "No match. The most possible assignment result is:<br /><font style=\"font-size: 28px;\">";
+                ProcessOutput();
                 return pm;
             }
-            pm.ar = AssignResult.impossible;
-            pm.resultString += "No match. The possible results include:<br /><font style=\"font-size: 28px;\">";
-            ProcessOutput();
+            
+            pm.ar = AssignResult.error;
+            pm.resultString = "Invalid input: out of range. Please check your input.";
+            pm.result = new List<double[]>();
             return pm;
         }
-
 
         public Tuple<List<string[]>, List<int[]>, string> GetParams()
         {
